@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://fjtp80le0sj4"]
+
+[ext_resource type="Script" uid="uid://bi8cymw0kfhmm" path="res://Scripts/2_5d_controler.gd" id="1_ippfd"]
+[ext_resource type="Texture2D" uid="uid://bei33us5cfca0" path="res://Assets/2D/icon.svg" id="2_gde1t"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sd5d7"]
+
+[node name="2_5DControler" type="CharacterBody3D" unique_id=858281536 node_paths=PackedStringArray("visible_on_screen_notifier_3d") groups=["2.5DPlayer"]]
+script = ExtResource("1_ippfd")
+visible_on_screen_notifier_3d = NodePath("VisibleOnScreenNotifier3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=800651516]
+shape = SubResource("CapsuleShape3D_sd5d7")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1853967801]
+aabb = AABB(-1.0028327, -1.162885, -0.7368188, 2.0056653, 2.32577, 1.4736376)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1977768582]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 0, 0)
+texture = ExtResource("2_gde1t")

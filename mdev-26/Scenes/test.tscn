@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://l5bmxfc8p280"]
+
+[ext_resource type="PackedScene" uid="uid://b8t6s1km0hbir" path="res://Scenes/cam_controller.tscn" id="1_8od7v"]
+[ext_resource type="PackedScene" uid="uid://fjtp80le0sj4" path="res://Scenes/2_5d_controler.tscn" id="2_qc4db"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8od7v"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_qc4db"]
+sky_material = SubResource("ProceduralSkyMaterial_8od7v")
+
+[sub_resource type="Environment" id="Environment_ys1qc"]
+background_mode = 2
+sky = SubResource("Sky_qc4db")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wr33u"]
+albedo_color = Color(0.79640394, 0.28687537, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gde1t"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[node name="Test" type="Node3D" unique_id=2086228589]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=557485234]
+environment = SubResource("Environment_ys1qc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=57489275]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1508901686]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.340332, 0, 0.32835388)
+use_collision = true
+size = Vector3(25.680664, 1, 6.073822)
+material = SubResource("StandardMaterial3D_wr33u")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=39608024]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.611908, 5.689436, -2.6903644)
+use_collision = true
+size = Vector3(76.223816, 13.717468, 0.7014618)
+material = SubResource("StandardMaterial3D_gde1t")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=693316443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.611908, 5.1680794, 3.6789107)
+use_collision = true
+size = Vector3(76.223816, 13.717468, 0.7014618)
+material = SubResource("StandardMaterial3D_gde1t")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=2140460670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.995163, 1.5526686, 0.32835388)
+use_collision = true
+size = Vector3(14.16571, 1, 6.073822)
+material = SubResource("StandardMaterial3D_wr33u")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1244918521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.209663, 1.6241016, 0.32835388)
+use_collision = true
+size = Vector3(17.269379, 1, 6.073822)
+material = SubResource("StandardMaterial3D_wr33u")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D3" unique_id=46616790]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7765388, 2.508728, 2.2794418)
+use_collision = true
+size = Vector3(1.2467766, 6.017456, 1.5149384)
+material = SubResource("StandardMaterial3D_wr33u")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D3" unique_id=1303802304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2965088, 2.508728, -0.72281456)
+use_collision = true
+size = Vector3(1.2467766, 6.017456, 1.5149384)
+material = SubResource("StandardMaterial3D_wr33u")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D3" unique_id=1456874435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.719757, 2.508728, 2.1803484)
+use_collision = true
+size = Vector3(1.2467766, 6.017456, 1.5149384)
+material = SubResource("StandardMaterial3D_wr33u")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1110549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.802895, -1.693727, 0.32835388)
+use_collision = true
+size = Vector3(17.269379, 1, 6.073822)
+material = SubResource("StandardMaterial3D_wr33u")
+
+[node name="CamController" parent="." unique_id=1711419330 instance=ExtResource("1_8od7v")]
+transform = Transform3D(0.99691737, -0.0023960117, 0.0784224, 0, 0.9995336, 0.030538393, -0.078458995, -0.030444255, 0.9964524, 15.166276, 2.9373667, 15.981758)
+
+[node name="2_5DControler" parent="." unique_id=858281536 instance=ExtResource("2_qc4db")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.446356, 1.6008906, -0.974905)
