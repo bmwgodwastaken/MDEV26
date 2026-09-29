@@ -30,6 +30,7 @@ func _physics_process(_delta: float) -> void:
 	# Fell off the level: reset to 2.5D and reload the scene.
 	if body.global_position.y < FALL_LIMIT:
 		PerspectiveManager.mode = PerspectiveManager.Mode.SOLID
+		Inventory.clear()
 		get_tree().reload_current_scene()
 
 
