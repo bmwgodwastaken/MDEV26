@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://qnc0yqsiqpv6"]
+
+[ext_resource type="Script" uid="uid://bpou4wm2e5b2i" path="res://Scenes/play.gd" id="1_28flt"]
+
+[node name="MainMenu" type="Control" unique_id=1600383685]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=1254212066]
+layout_mode = 0
+offset_right = 442.0
+offset_bottom = 78.0
+theme_override_font_sizes/font_size = 84
+text = "MDEV26"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1667328236]
+layout_mode = 0
+offset_top = 154.0
+offset_right = 346.0
+offset_bottom = 555.0
+theme_override_constants/separation = 26
+
+[node name="Play" type="Button" parent="VBoxContainer" unique_id=319841831]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Play"
+script = ExtResource("1_28flt")
+Level_Selector = "uid://2had4nuxy500"
+
+[node name="Settings" type="Button" parent="VBoxContainer" unique_id=1852914821]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="Credits" type="Button" parent="VBoxContainer" unique_id=1259438889]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Credits"
+
+[node name="Credits2" type="Button" parent="VBoxContainer" unique_id=878532324]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[connection signal="button_down" from="VBoxContainer/Play" to="VBoxContainer/Play" method="_on_button_down"]
