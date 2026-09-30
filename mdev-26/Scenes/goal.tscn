@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://tx8pnjntsspr"]
+
+[ext_resource type="Script" uid="uid://dni7p2tf58pjl" path="res://Scripts/goal.gd" id="1_paeek"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_onuut"]
+height = 2.8291016
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nqaca"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s0pnd"]
+size = Vector3(2.1958618, 3.2099, 2.4608154)
+
+[node name="Goal" type="Node3D" unique_id=952319664]
+script = ExtResource("1_paeek")
+Goal_path = "uid://bq3a843t83cx4"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=444284554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41455078, 0)
+mesh = SubResource("CylinderMesh_onuut")
+surface_material_override/0 = SubResource("StandardMaterial3D_nqaca")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=938969754]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41455078, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=742658113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12612915, 0.0121154785, -0.005432129)
+shape = SubResource("BoxShape3D_s0pnd")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

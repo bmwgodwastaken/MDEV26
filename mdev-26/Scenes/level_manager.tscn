@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bvw71o6robo8y"]
+
+[ext_resource type="PackedScene" uid="uid://bg2s4ll73jet2" path="res://Scenes/base_level_button.tscn" id="2_83v1d"]
+
+[sub_resource type="GDScript" id="GDScript_f6wcy"]
+script/source = "extends Node
+
+@export_file(\"* tscn\") var Levels:Array[String] = []
+@export var Button_Scene:PackedScene
+@export var Current_level = 0
+@export var grid_container: GridContainer
+var queue
+
+func _ready() -> void:
+	Current_level = 0
+
+func LoadScene(Scene:int,is_played:bool = false):
+	if Levels[Scene]:
+		var Tcn:String = Levels[Scene]
+		get_tree().change_scene_to_file(Tcn)
+		if not is_played:
+			queue += 1
+			
+
+func _process(delta: float) -> void:
+	if get_tree().current_scene and get_tree().current_scene.name == \"LevelSelector\":
+		grid_container = get_tree().current_scene.get_node_or_null(\"GridContainer\")
+
+func Create_level_button(level:int = -1):
+	var ins = Button_Scene.instantiate()
+	grid_container.add_child(ins)
+	if level == -1:
+		ins.Level_to_load = Current_level + 1
+	else:
+		ins.Level_to_load = level
+	ins.is_played_before = true
+"
+
+[node name="LevelManager" type="Node" unique_id=2076252457]
+script = SubResource("GDScript_f6wcy")
+Levels = Array[String](["uid://b45qhtg330dtx", "uid://cxadqg4g4yoik"])
+Button_Scene = ExtResource("2_83v1d")
