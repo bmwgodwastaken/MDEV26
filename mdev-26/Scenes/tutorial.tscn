@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b7qdwlgjxtvee" path="res://Scripts/locked_door.gd" id="7_h2ono"]
 [ext_resource type="Script" uid="uid://blkh6squha5pg" path="res://Scripts/key_pickup.gd" id="8_on4kn"]
 [ext_resource type="PackedScene" uid="uid://tx8pnjntsspr" path="res://Scenes/goal.tscn" id="9_on4kn"]
+[ext_resource type="PackedScene" uid="uid://ivel3ia234p" path="res://Scenes/plank.tscn" id="10_70gml"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p8jf4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -51,6 +52,12 @@ script = ExtResource("1_p1f1o")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.529335, -0.5, 0)
 use_collision = true
 size = Vector3(30.354004, 1, 4)
+script = ExtResource("1_p1f1o")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1477114502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.35439, -0.5, 0.3151908)
+use_collision = true
+size = Vector3(4.4387817, 1, 4)
 script = ExtResource("1_p1f1o")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1746015863]
@@ -113,7 +120,7 @@ font_size = 64
 autowrap_mode = 2
 
 [node name="Label3D6" type="Label3D" parent="." unique_id=108229840]
-transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 47.592884, 1.7576449, -0.7296419)
+transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 66.17954, 1.2035038, -0.7296419)
 text = "This Is The End Of the Tutorial"
 font_size = 64
 autowrap_mode = 2
@@ -146,4 +153,7 @@ key_id = "blue"
 faction = 2
 
 [node name="Goal" parent="." unique_id=952319664 instance=ExtResource("9_on4kn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.200943, 1, -0.21064568)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.951324, 1, 0.10454512)
+
+[node name="Plank" parent="." unique_id=1680490436 instance=ExtResource("10_70gml")]
+transform = Transform3D(0.01495254, 0, -0.99988824, 0, 1, 0, 0.99988824, 0, 0.01495254, 56.972195, 0.33167875, -0.7702291)
