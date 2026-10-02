@@ -5,7 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 6.5
 @export var grab_area: Area3D
 @export var grab_point: Marker3D
-var COIB:Node3D #Current Object In Body
+var COIB:RigidBody3D #Current Object In Body
 var Is_Grabbing:bool
 
 
@@ -18,16 +18,18 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
-	if Input.is_action_just_pressed("interact"):
-		if COIB:
-			if Is_Grabbing:
-				Is_Grabbing = false
-			else:
-				Is_Grabbing = true
+	if Input.is_action_just_pressed("Pick_up") and COIB:
+		if Is_Grabbing:
+			Is_Grabbing = false
+			COIB.freeze = false
+		else:
+			Is_Grabbing = true
+			COIB.freeze = true
 	
-	if Is_Grabbing:
-		if COIB:
-			COIB.global_position = grab_point.position
+	
+	if Is_Grabbing and COIB:
+		COIB.global_position = grab_point.global_position
+	
 	
 	
 	

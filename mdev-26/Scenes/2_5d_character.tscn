@@ -6,7 +6,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6w285"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yiqvr"]
-size = Vector3(3.7971191, 3.0693817, 4.6624756)
+size = Vector3(2.2610474, 3.0693817, 4.6624756)
 
 [node name="2_5DCharacter" type="CharacterBody3D" unique_id=290764025 node_paths=PackedStringArray("grab_area", "grab_point") groups=["2.5DPlayer"]]
 script = ExtResource("1_yiqvr")
@@ -20,7 +20,7 @@ texture = ExtResource("2_dyk6q")
 shape = SubResource("CapsuleShape3D_6w285")
 
 [node name="GrabPoint" type="Marker3D" parent="." unique_id=555686202]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9301002, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3559937, 0, 0)
 
 [node name="GrabArea" type="Area3D" parent="." unique_id=369032097]
 

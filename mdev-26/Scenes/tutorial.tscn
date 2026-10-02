@@ -119,6 +119,12 @@ text = "This Door is Locked Too but The Key Is Hidden In Plane Sight"
 font_size = 64
 autowrap_mode = 2
 
+[node name="Label3D7" type="Label3D" parent="." unique_id=1774234083]
+transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 51.65285, 1.7576449, -0.7296419)
+text = "By Pressing G you Can Grab Planks"
+font_size = 64
+autowrap_mode = 2
+
 [node name="Label3D6" type="Label3D" parent="." unique_id=108229840]
 transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 66.17954, 1.2035038, -0.7296419)
 text = "This Is The End Of the Tutorial"
@@ -156,4 +162,4 @@ faction = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.951324, 1, 0.10454512)
 
 [node name="Plank" parent="." unique_id=1680490436 instance=ExtResource("10_70gml")]
-transform = Transform3D(0.01495254, 0, -0.99988824, 0, 1, 0, 0.99988824, 0, 0.01495254, 56.972195, 0.33167875, -0.7702291)
+transform = Transform3D(-0.99999225, 0, 0.003924799, 0, 1, 0, -0.003924799, 0, -0.99999225, 48.91061, 0.07887757, -0.7537725)
