@@ -11,7 +11,7 @@ func _initialize() -> void:
 
 
 func _run() -> void:
-	var level: Node = load("res://Scenes/vanishing_box_test.tscn").instantiate()
+	var level: Node = load("res://Scenes/Testing_Mechanics_Scenes/vanishing_box_test.tscn").instantiate()
 	root.add_child(level)
 	player = level.get_node("2_5DCharacter")
 	switcher = player.get_node("PerspectiveSwitcher")

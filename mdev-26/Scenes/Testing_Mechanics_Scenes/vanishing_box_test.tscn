@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://k75hgw8owjyo" path="res://Scenes/2_5d_character.tscn" id="1_player"]
 [ext_resource type="PackedScene" uid="uid://hk02k3f4q5pk" path="res://Scenes/camera_controller_2_5d.tscn" id="2_camera"]
-[ext_resource type="Script" uid="uid://bvb4a0s7atg5a" path="res://Scripts/world_object.gd" id="3_world"]
-[ext_resource type="Script" uid="uid://rg8bi64774bk" path="res://Scripts/perspective_switcher.gd" id="4_switch"]
-[ext_resource type="Script" uid="uid://bmimhwhak42r" path="res://Scripts/pressure_plate.gd" id="5_plate"]
-[ext_resource type="Script" uid="uid://bly3vcakn2voj" path="res://Scripts/plate_door.gd" id="6_door"]
-[ext_resource type="Script" uid="uid://b84s0jv7t71sj" path="res://Scripts/push_box.gd" id="7_box"]
-[ext_resource type="Script" uid="uid://b01xoyow44vy2" path="res://Scripts/pusher.gd" id="8_pusher"]
+[ext_resource type="Script" uid="uid://bvb4a0s7atg5a" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
+[ext_resource type="Script" uid="uid://rg8bi64774bk" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
+[ext_resource type="Script" uid="uid://bmimhwhak42r" path="res://Scripts/Puzzles/pressure_plate.gd" id="5_plate"]
+[ext_resource type="Script" uid="uid://bly3vcakn2voj" path="res://Scripts/Puzzles/plate_door.gd" id="6_door"]
+[ext_resource type="Script" uid="uid://b84s0jv7t71sj" path="res://Scripts/Puzzles/push_box.gd" id="7_box"]
+[ext_resource type="Script" uid="uid://b01xoyow44vy2" path="res://Scripts/Player/pusher.gd" id="8_pusher"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

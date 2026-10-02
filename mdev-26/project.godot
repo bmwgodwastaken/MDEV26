@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="MDEV26"
-run/main_scene="res://Scenes/switch_test.tscn"
+run/main_scene="res://Scenes/Testing_Mechanics_Scenes/switch_test.tscn"
 config/features=PackedStringArray("4.8", "GL Compatibility")
 config/icon="res://Assets/2D/icon.svg"
 
 [autoload]
 
-PerspectiveManager="*res://Scripts/perspective_manager.gd"
-Inventory="*res://Scripts/inventory.gd"
+PerspectiveManager="*res://Scripts/Perspective/perspective_manager.gd"
+Inventory="*res://Scripts/Interaction/inventory.gd"
 
 [display]
 
