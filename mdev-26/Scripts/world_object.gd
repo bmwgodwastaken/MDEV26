@@ -27,6 +27,8 @@ const COLORS := {
 
 var _material := StandardMaterial3D.new()
 var _player: Node3D
+var _bodies: Array[StaticBody3D] = []
+var _open := false
 
 
 func _ready() -> void:
@@ -47,6 +49,19 @@ func _ready() -> void:
 	set_process(fade_when_player_behind)
 	PerspectiveManager.mode_changed.connect(_refresh.unbind(1))
 	_refresh()
+	_apply_open()
+
+
+## Open = hidden and no collision in either mode (e.g. a door). Safe to call before _ready finishes.
+func set_open(value: bool) -> void:
+	_open = value
+	_apply_open()
+
+
+func _apply_open() -> void:
+	visible = not _open
+	for body in _bodies:
+		body.collision_layer = 0 if _open else 1 << (body.get_meta("layer") - 1)
 
 
 static func exists_in_mode(piece_faction: Faction, mode: PerspectiveManager.Mode) -> bool:
@@ -81,6 +96,8 @@ func _add_body(layer: int, size: Vector3, center: Vector3) -> void:
 	body.collision_layer = 0
 	body.collision_mask = 0
 	body.set_collision_layer_value(layer, true)
+	body.set_meta("layer", layer)
+	_bodies.append(body)
 	var shape := CollisionShape3D.new()
 	shape.shape = BoxShape3D.new()
 	shape.shape.size = size
