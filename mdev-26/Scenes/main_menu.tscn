@@ -1,49 +1,140 @@
 [gd_scene format=3 uid="uid://qnc0yqsiqpv6"]
 
-[ext_resource type="Script" uid="uid://bpou4wm2e5b2i" path="res://Scripts/UI/play.gd" id="1_28flt"]
+[ext_resource type="Script" path="res://Scripts/UI/main_menu.gd" id="1_menu"]
 
-[node name="MainMenu" type="Control" unique_id=1600383685]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="Environment" id="Environment_menu"]
+background_mode = 1
+background_color = Color(0.08, 0.1, 0.14, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.7, 0.75, 0.85, 1)
+ambient_light_energy = 0.8
 
-[node name="Label" type="Label" parent="." unique_id=1254212066]
-layout_mode = 0
-offset_right = 442.0
-offset_bottom = 78.0
-theme_override_font_sizes/font_size = 84
+[sub_resource type="BoxShape3D" id="BoxShape3D_big"]
+size = Vector3(4.4, 1.3, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_big"]
+size = Vector3(4.4, 1.3, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_small"]
+size = Vector3(3.2, 0.9, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_small"]
+size = Vector3(3.2, 0.9, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_landing"]
+size = Vector3(4.4, 1.2, 1.2)
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_menu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_menu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7071, 0.7071, 0, -0.7071, 0.7071, 0, 5, 5)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+projection = 1
+size = 9.0
+current = true
+
+[node name="Title" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 0)
+pixel_size = 0.01
 text = "MDEV26"
+font_size = 160
+outline_size = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1667328236]
-layout_mode = 0
-offset_top = 154.0
-offset_right = 346.0
-offset_bottom = 555.0
-theme_override_constants/separation = 26
+[node name="WarningSign" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 1.6, 0.2)
+pixel_size = 0.01
+modulate = Color(1, 0.35, 0.3, 1)
+text = "Do NOT
+press Q"
+font_size = 64
+outline_size = 12
 
-[node name="Play" type="Button" parent="VBoxContainer" unique_id=319841831]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
+[node name="Play" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+freeze = true
+
+[node name="Shape" type="CollisionShape3D" parent="Play"]
+shape = SubResource("BoxShape3D_big")
+
+[node name="Mesh" type="MeshInstance3D" parent="Play"]
+mesh = SubResource("BoxMesh_big")
+
+[node name="Label" type="Label3D" parent="Play"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.32)
+pixel_size = 0.01
 text = "Play"
-script = ExtResource("1_28flt")
-Level_Selector = "uid://2had4nuxy500"
+font_size = 80
+outline_size = 8
 
-[node name="Settings" type="Button" parent="VBoxContainer" unique_id=1852914821]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Settings"
+[node name="Quit" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9, 0)
 
-[node name="Credits" type="Button" parent="VBoxContainer" unique_id=1259438889]
+[node name="Shape" type="CollisionShape3D" parent="Quit"]
+shape = SubResource("BoxShape3D_big")
+
+[node name="Mesh" type="MeshInstance3D" parent="Quit"]
+mesh = SubResource("BoxMesh_big")
+
+[node name="Label" type="Label3D" parent="Quit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.32)
+pixel_size = 0.01
+text = "Quit"
+font_size = 80
+outline_size = 8
+
+[node name="Landing" type="Area3D" parent="Quit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Quit/Landing"]
+shape = SubResource("BoxShape3D_landing")
+
+[node name="Credits" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, -3.5, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Credits"]
+shape = SubResource("BoxShape3D_small")
+
+[node name="Mesh" type="MeshInstance3D" parent="Credits"]
+mesh = SubResource("BoxMesh_small")
+
+[node name="Label" type="Label3D" parent="Credits"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.32)
+pixel_size = 0.01
+text = "Credits"
+font_size = 56
+outline_size = 8
+
+[node name="CreditsLayer" type="CanvasLayer" parent="."]
+
+[node name="CreditsPanel" type="PanelContainer" parent="CreditsLayer"]
+offset_top = 60.0
+custom_minimum_size = Vector2(420, 0)
+
+[node name="Box" type="VBoxContainer" parent="CreditsLayer/CreditsPanel"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+
+[node name="Title" type="Label" parent="CreditsLayer/CreditsPanel/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
 text = "Credits"
 
-[node name="Credits2" type="Button" parent="VBoxContainer" unique_id=878532324]
+[node name="Names" type="Label" parent="CreditsLayer/CreditsPanel/Box"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Quit"
+theme_override_font_sizes/font_size = 22
+text = "Production: richy
+2D controller: Hairon
+2.5D controller: Nannoy
+Core mechanics: Toxic_Humble / Ben
+Art: Dreamcatcher / Karma
+Music & sound: Tetaban"
 
-[connection signal="button_down" from="VBoxContainer/Play" to="VBoxContainer/Play" method="_on_button_down"]
+[node name="Close" type="Button" parent="CreditsLayer/CreditsPanel/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Close"

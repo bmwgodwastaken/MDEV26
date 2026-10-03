@@ -28,4 +28,9 @@ columns = 8
 
 [node name="BaseLevelButton" parent="GridContainer" unique_id=332489755 instance=ExtResource("1_22lal")]
 layout_mode = 2
-Button_path = "uid://c12tj01ujoyac"
+Button_path = "res://Scenes/Levels/level_01_tutorial.tscn"
+
+[node name="BaseLevelButton2" parent="GridContainer" instance=ExtResource("1_22lal")]
+layout_mode = 2
+text = "2"
+Button_path = "res://Scenes/Levels/level_02_vanishing_box.tscn"
