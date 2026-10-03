@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b7qdwlgjxtvee" path="res://Scripts/locked_door.gd" id="7_h2ono"]
 [ext_resource type="Script" uid="uid://blkh6squha5pg" path="res://Scripts/key_pickup.gd" id="8_on4kn"]
 [ext_resource type="PackedScene" uid="uid://tx8pnjntsspr" path="res://Scenes/goal.tscn" id="9_on4kn"]
+[ext_resource type="Script" uid="uid://csvfpifbnot6k" path="res://Scripts/Plank_Spwaner.gd" id="10_8va2t"]
 [ext_resource type="PackedScene" uid="uid://ivel3ia234p" path="res://Scenes/plank.tscn" id="10_70gml"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p8jf4"]
@@ -26,6 +27,7 @@ sky = SubResource("Sky_p1f1o")
 
 [node name="BlueDoor" type="CSGBox3D" parent="." unique_id=620369295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.082325, 1.956677, -0.0030243397)
+use_collision = true
 size = Vector3(1, 4, 4)
 script = ExtResource("1_p1f1o")
 
@@ -139,6 +141,7 @@ autowrap_mode = 2
 
 [node name="RedDoor" type="CSGBox3D" parent="." unique_id=1781356104]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.406229, 1.9085383, 0.019061565)
+use_collision = true
 size = Vector3(1, 4, 4)
 script = ExtResource("1_p1f1o")
 
@@ -161,5 +164,11 @@ faction = 2
 [node name="Goal" parent="." unique_id=952319664 instance=ExtResource("9_on4kn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.951324, 1, 0.10454512)
 
-[node name="Plank" parent="." unique_id=1680490436 instance=ExtResource("10_70gml")]
-transform = Transform3D(-0.99999225, 0, 0.003924799, 0, 1, 0, -0.003924799, 0, -0.99999225, 48.91061, 0.07887757, -0.7537725)
+[node name="PlankSpwaner" type="Node" parent="." unique_id=427592681 node_paths=PackedStringArray("Marker3d")]
+script = ExtResource("10_8va2t")
+Marker3d = NodePath("Marker3D")
+Plank = ExtResource("10_70gml")
+metadata/_custom_type_script = "uid://csvfpifbnot6k"
+
+[node name="Marker3D" type="Marker3D" parent="PlankSpwaner" unique_id=632281523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.561172, 0.3627844, -0.92718077)

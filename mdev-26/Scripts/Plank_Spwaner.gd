@@ -12,5 +12,7 @@ func _process(delta: float) -> void:
 		var ins:RigidBody3D = Plank.instantiate()
 		get_tree().current_scene.add_child(ins)
 		ins.global_position = Marker3d.global_position
+		ins.global_rotation_degrees.y = 180
 		last_spwan_planks.append(ins)
 		print("Spwaned!" + str(last_spwan_planks))
+	

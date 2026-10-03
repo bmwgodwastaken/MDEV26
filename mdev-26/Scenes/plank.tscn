@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://ivel3ia234p"]
 
+[ext_resource type="Script" uid="uid://bd4c5vkc17hky" path="res://Scripts/plank.gd" id="1_t6gv0"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_o38xi"]
 size = Vector3(8.756706, 0.092285156, 0.8977127)
 
@@ -10,6 +12,7 @@ albedo_color = Color(0.57113767, 0.37080312, 0.10380932, 1)
 points = PackedVector3Array(-4.378353, -0.046142578, -0.44885635, -4.378353, 0.046142578, -0.44885635, 4.378353, -0.046142578, -0.44885635, -4.378353, -0.046142578, 0.44885635, -4.378353, 0.046142578, 0.44885635, 4.378353, 0.046142578, -0.44885635, 4.378353, -0.046142578, 0.44885635, 4.378353, 0.046142578, 0.44885635)
 
 [node name="Plank" type="RigidBody3D" unique_id=1680490436 groups=["Grabble"]]
+script = ExtResource("1_t6gv0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1607348291]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.368367, 0, 0)

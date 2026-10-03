@@ -29,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Is_Grabbing and COIB:
 		COIB.global_position = grab_point.global_position
+		
 	
 	
 	
