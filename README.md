@@ -39,7 +39,7 @@ Karma / DreamCatcher: Art and visual concepts
 Tetaban: Music and sound effects
 
 
-Jam Build Status
+
 
 This project was developed within a game jam deadline. The exported build has been playtested, and two issues were observed:
 
@@ -49,7 +49,7 @@ A vanishing box may move in depth and fall off its platform.
 
 
 
-Development
+Development:
 
 Built with Godot.
 
