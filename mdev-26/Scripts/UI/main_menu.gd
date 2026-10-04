@@ -8,6 +8,9 @@ signal quit_requested
 
 const LEVEL_SELECTOR := "res://Scenes/level_selector.tscn"
 const QUIT_DELAY := 1.2
+const SIGN_RANGE := Vector2(5.5, 4.0) # how far the sign may wander from the middle of the screen (meters)
+const SIGN_FOLLOW := 1.6 # how quickly it heads for its current random spot
+const SIGN_Z := 0.5 # in front of the buttons
 const BASE_COLOR := Color(0.25, 0.3, 0.4)
 const HOVER_COLOR := Color(0.4, 0.5, 0.65)
 
@@ -23,7 +26,11 @@ var credits_open := false
 var _fallen := false
 var _landed := false
 var _materials := {}
-var _sign_y := 0.0
+var _time := 0.0
+var _sign_base := Vector2(0, -0.3) # where the sign is, before the wiggle
+var _sign_target := Vector2.ZERO
+var _sign_timer := 0.0
+var _rng := RandomNumberGenerator.new()
 
 
 ## The menu always starts in the flat (2D) view, whatever the last level left behind.
@@ -37,19 +44,35 @@ func _ready() -> void:
 		material.albedo_color = BASE_COLOR
 		slab.get_node("Mesh").material_override = material
 		_materials[slab.name] = material
-	_sign_y = warning_sign.position.y
 	credits_panel.position.x = get_viewport().get_visible_rect().size.x # parked off-screen
 	credits_panel.get_node("Box/Close").pressed.connect(_set_credits.bind(false))
 	$Quit/Landing.body_entered.connect(_on_landing)
 	PerspectiveManager.mode_changed.connect(_on_mode_changed)
+	_rng.randomize()
 	_apply_camera()
 
 
-func _process(_delta: float) -> void:
-	warning_sign.position.y = _sign_y + sin(Time.get_ticks_msec() / 400.0) * 0.15
+func _process(delta: float) -> void:
+	_time += delta
+	_wander_sign(delta)
 	var hovered := _pick(get_viewport().get_mouse_position())
 	for slab_name in _materials:
 		_materials[slab_name].albedo_color = HOVER_COLOR if slab_name == hovered else BASE_COLOR
+
+
+## The warning wanders around the screen: it heads for a random spot, picks a new one every
+## second or two, and wiggles and tilts a little as it goes, like a worm.
+func _wander_sign(delta: float) -> void:
+	_sign_timer -= delta
+	if _sign_timer <= 0.0:
+		_sign_target = Vector2(_rng.randf_range(-SIGN_RANGE.x, SIGN_RANGE.x), _rng.randf_range(-SIGN_RANGE.y, SIGN_RANGE.y))
+		_sign_timer = _rng.randf_range(1.0, 2.5)
+	var before := _sign_base
+	_sign_base = _sign_base.lerp(_sign_target, 1.0 - exp(-delta * SIGN_FOLLOW))
+	var wiggle := Vector2(sin(_time * 3.0) * 0.15, sin(_time * 6.0) * 0.15)
+	warning_sign.position = Vector3(_sign_base.x + wiggle.x, _sign_base.y + wiggle.y, SIGN_Z)
+	var heading := (_sign_base - before).x / maxf(delta, 0.001) # moving right or left
+	warning_sign.rotation.z = sin(_time * 5.0) * 0.06 - clampf(heading, -2.0, 2.0) * 0.04
 
 
 func _unhandled_input(event: InputEvent) -> void:

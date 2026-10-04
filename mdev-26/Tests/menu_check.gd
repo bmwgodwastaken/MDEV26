@@ -71,6 +71,24 @@ func _run() -> void:
 	await _frames(60)
 	assert(is_equal_approx(menu.play.global_position.y, start_y), "Play stays put while the menu is flat")
 
+	# The warning is one line and wanders around the screen at random, staying on screen.
+	assert(not "\n" in menu.warning_sign.text and menu.warning_sign.text == "Do Not Press Q", "the warning is one line: Do Not Press Q")
+	menu._rng.seed = 12345 # same wandering every run
+	var path_length := 0.0
+	var seen_x := []
+	var seen_y := []
+	var last: Vector3 = menu.warning_sign.position
+	for i in 20:
+		await _frames(30)
+		var now: Vector3 = menu.warning_sign.position
+		path_length += last.distance_to(now)
+		last = now
+		seen_x.append(now.x)
+		seen_y.append(now.y)
+		assert(absf(now.x) < 5.9 and absf(now.y) < 4.4, "the warning stays on screen, at %s" % now)
+	assert(path_length > 4.0, "the warning wanders around, only moved %s" % path_length)
+	assert(seen_x.max() - seen_x.min() > 1.0 and seen_y.max() - seen_y.min() > 1.0, "it wanders both sideways and up and down")
+
 	var q := InputEventAction.new()
 	q.action = "switch_perspective"
 	q.pressed = true
