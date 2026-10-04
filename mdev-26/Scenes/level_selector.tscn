@@ -34,3 +34,8 @@ Button_path = "res://Scenes/Levels/level_01_tutorial.tscn"
 layout_mode = 2
 text = "2"
 Button_path = "res://Scenes/Levels/level_02_vanishing_box.tscn"
+
+[node name="BaseLevelButton3" parent="GridContainer" instance=ExtResource("1_22lal")]
+layout_mode = 2
+text = "3"
+Button_path = "res://Scenes/Levels/level_03_plank_bridge.tscn"

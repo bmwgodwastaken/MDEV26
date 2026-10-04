@@ -111,6 +111,7 @@ func _level2() -> void:
 	_assert_no_text_overlap(level)
 	assert(not inventory.has_key("red") and root.get_node("PerspectiveManager").mode == 0, "new level starts clean in 2.5D")
 	var goal = level.get_node("Goal")
+	goal.next_scene = "" # stay in this scene for the check
 	var reached := [false]
 	goal.reached.connect(func(): reached[0] = true)
 	var box = level.get_node("BlueBox")

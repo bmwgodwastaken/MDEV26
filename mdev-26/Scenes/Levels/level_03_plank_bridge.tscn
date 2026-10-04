@@ -1,0 +1,126 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://k75hgw8owjyo" path="res://Scenes/2_5d_character.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://hk02k3f4q5pk" path="res://Scenes/camera_controller_2_5d.tscn" id="2_camera"]
+[ext_resource type="Script" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
+[ext_resource type="Script" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
+[ext_resource type="Script" path="res://Scripts/Level/level.gd" id="5_level"]
+[ext_resource type="Script" path="res://Scripts/Level/goal.gd" id="6_goal"]
+[ext_resource type="Script" path="res://Scripts/Plank_Spwaner.gd" id="7_spawner"]
+[ext_resource type="PackedScene" uid="uid://ivel3ia234p" path="res://Scenes/plank.tscn" id="8_plank"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_backdrop"]
+albedo_color = Color(0.2, 0.24, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_core"]
+albedo_color = Color(1, 0.85, 0.1, 1)
+
+[node name="Level03PlankBridge" type="Node3D"]
+script = ExtResource("5_level")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Backdrop" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 3, -14.3)
+size = Vector3(60, 8, 0.2)
+material = SubResource("StandardMaterial3D_backdrop")
+
+[node name="PlatformStart" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 0)
+size = Vector3(12, 1, 4)
+script = ExtResource("3_world")
+
+[node name="PlatformMiddle" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8, -0.5, 0)
+size = Vector3(12.4, 1, 4)
+script = ExtResource("3_world")
+
+[node name="PlatformFar" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.8, -0.5, -12)
+size = Vector3(14.4, 1, 4)
+script = ExtResource("3_world")
+
+[node name="Goal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 1, -12)
+script = ExtResource("6_goal")
+
+[node name="Core" type="CSGCylinder3D" parent="Goal"]
+radius = 0.3
+material = SubResource("StandardMaterial3D_core")
+
+[node name="ExitLabel" type="Label3D" parent="Goal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+pixel_size = 0.012
+no_depth_test = true
+text = "EXIT"
+font_size = 48
+outline_size = 10
+
+[node name="PlankSpwaner" type="Node" parent="." node_paths=PackedStringArray("Marker3d")]
+script = ExtResource("7_spawner")
+Marker3d = NodePath("Marker3D")
+Plank = ExtResource("8_plank")
+
+[node name="Marker3D" type="Marker3D" parent="PlankSpwaner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.4, 0.3)
+
+[node name="PlankSpwaner2" type="Node" parent="." node_paths=PackedStringArray("Marker3d")]
+script = ExtResource("7_spawner")
+Marker3d = NodePath("Marker3D")
+Plank = ExtResource("8_plank")
+
+[node name="Marker3D" type="Marker3D" parent="PlankSpwaner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0.4, 0.3)
+
+[node name="TextGrab" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3.4, 0)
+pixel_size = 0.012
+no_depth_test = true
+text = "PLANK BRIDGE
+G  -  grab / drop a plank
+Carry it to the gap and drop it across"
+font_size = 40
+outline_size = 10
+
+[node name="TextDepth" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 3.4, 0)
+pixel_size = 0.012
+no_depth_test = true
+text = "The next platform is far away in depth.
+Drop the plank across the gap in 2.5D,
+then press Q and walk over it in 2D!"
+font_size = 40
+outline_size = 10
+
+[node name="TextFar" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 3.4, -12)
+pixel_size = 0.012
+no_depth_test = true
+text = "Planks hold you in both views."
+font_size = 40
+outline_size = 10
+
+[node name="2_5DCharacter" parent="." instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0)
+
+[node name="PerspectiveSwitcher" type="Node" parent="2_5DCharacter"]
+script = ExtResource("4_switch")
+
+[node name="CameraController2_5D" parent="." instance=ExtResource("2_camera")]
+transform = Transform3D(1, 0, 0, 0, 0.9063, 0.4226, 0, -0.4226, 0.9063, 6, 7, 10)

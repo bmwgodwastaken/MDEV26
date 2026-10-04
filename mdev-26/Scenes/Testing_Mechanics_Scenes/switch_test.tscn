@@ -137,8 +137,3 @@ transform = Transform3D(1, 0, 0, 0, 0.9063, 0.4226, 0, -0.4226, 0.9063, 6, 7, 10
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=400499136]
 script = ExtResource("8_hud")
-
-[node name="RedKey" type="Node3D" parent="." unique_id=1816056003]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.87737, 1.5426221, -11.280549)
-script = ExtResource("6_key")
-interact_range = 2.0

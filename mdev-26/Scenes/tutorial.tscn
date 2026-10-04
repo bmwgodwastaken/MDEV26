@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://tx8pnjntsspr" path="res://Scenes/goal.tscn" id="9_on4kn"]
 [ext_resource type="Script" uid="uid://csvfpifbnot6k" path="res://Scripts/Plank_Spwaner.gd" id="10_8va2t"]
 [ext_resource type="PackedScene" uid="uid://ivel3ia234p" path="res://Scenes/plank.tscn" id="10_70gml"]
+[ext_resource type="Script" path="res://Scripts/Level/level.gd" id="11_level"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p8jf4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,6 +25,7 @@ background_mode = 2
 sky = SubResource("Sky_p1f1o")
 
 [node name="Tutorial" type="Node3D" unique_id=1647970730]
+script = ExtResource("11_level")
 
 [node name="BlueDoor" type="CSGBox3D" parent="." unique_id=620369295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.082325, 1.956677, -0.0030243397)

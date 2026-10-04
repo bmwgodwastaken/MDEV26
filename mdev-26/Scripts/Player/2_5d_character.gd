@@ -18,16 +18,24 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
-	if Input.is_action_just_pressed("Pick_up") and COIB:
+	# The plank we were carrying was deleted (e.g. it fell out of the world): let go.
+	if Is_Grabbing and not is_instance_valid(COIB):
+		Is_Grabbing = false
+		COIB = null
+
+	if Input.is_action_just_pressed("Pick_up"):
 		if Is_Grabbing:
 			Is_Grabbing = false
 			COIB.freeze = false
+			COIB = null
 		else:
-			Is_Grabbing = true
-			COIB.freeze = true
-	
-	
-	if Is_Grabbing and COIB:
+			# Only something inside the grab area right now can be grabbed.
+			COIB = _nearest_grabbable()
+			if COIB:
+				Is_Grabbing = true
+				COIB.freeze = true
+
+	if Is_Grabbing:
 		COIB.global_position = grab_point.global_position
 		
 	
@@ -48,10 +56,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _on_grab_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Grabble"):
-		COIB = body
-
-#func _on_grab_area_body_exited(body: Node3D) -> void:
-	#if body.is_in_group("Grabble"):
-		#COIB = null
+## Closest "Grabble" body inside the grab area, or null.
+func _nearest_grabbable() -> RigidBody3D:
+	var nearest: RigidBody3D = null
+	var nearest_distance := INF
+	for body in grab_area.get_overlapping_bodies():
+		if body is RigidBody3D and body.is_in_group("Grabble"):
+			var distance := global_position.distance_to(body.global_position)
+			if distance < nearest_distance:
+				nearest = body
+				nearest_distance = distance
+	return nearest

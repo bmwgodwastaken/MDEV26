@@ -82,6 +82,7 @@ script = ExtResource("3_world")
 [node name="Goal" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 1, -12)
 script = ExtResource("11_goal")
+next_scene = "res://Scenes/Levels/level_03_plank_bridge.tscn"
 
 [node name="Core" type="CSGCylinder3D" parent="Goal"]
 radius = 0.3
