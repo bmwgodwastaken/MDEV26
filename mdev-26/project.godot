@@ -11,8 +11,7 @@ config_version=5
 [application]
 
 config/name="MDEV26"
-config/tags=PackedStringArray("current_project")
-run/main_scene="uid://qnc0yqsiqpv6"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.8", "GL Compatibility")
 config/icon="res://Assets/2D/icon.svg"
 

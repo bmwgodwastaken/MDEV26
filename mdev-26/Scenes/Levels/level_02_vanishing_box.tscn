@@ -1,0 +1,141 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://k75hgw8owjyo" path="res://Scenes/2_5d_character.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://hk02k3f4q5pk" path="res://Scenes/camera_controller_2_5d.tscn" id="2_camera"]
+[ext_resource type="Script" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
+[ext_resource type="Script" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
+[ext_resource type="Script" path="res://Scripts/Player/pusher.gd" id="5_pusher"]
+[ext_resource type="Script" path="res://Scripts/Puzzles/pressure_plate.gd" id="6_plate"]
+[ext_resource type="Script" path="res://Scripts/Puzzles/plate_door.gd" id="7_door"]
+[ext_resource type="Script" path="res://Scripts/Puzzles/push_box.gd" id="8_box"]
+[ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="9_hud"]
+[ext_resource type="Script" path="res://Scripts/Level/level.gd" id="10_level"]
+[ext_resource type="Script" path="res://Scripts/Level/goal.gd" id="11_goal"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_backdrop"]
+albedo_color = Color(0.2, 0.24, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_core"]
+albedo_color = Color(1, 0.85, 0.1, 1)
+
+[node name="Level02VanishingBox" type="Node3D"]
+script = ExtResource("10_level")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Backdrop" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 3, -14.3)
+size = Vector3(32, 8, 0.2)
+material = SubResource("StandardMaterial3D_backdrop")
+
+[node name="FloorNear" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 0)
+size = Vector3(12, 1, 4)
+script = ExtResource("3_world")
+
+[node name="Stopper" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8, 0.3, 0)
+size = Vector3(0.4, 0.6, 4)
+script = ExtResource("3_world")
+
+[node name="PlateBlue" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.05, 0.8)
+script = ExtResource("6_plate")
+size = Vector3(2.4, 0.1, 2)
+tint = Color(0.25, 0.45, 1, 1)
+
+[node name="BlueBox" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.55, 0.8)
+script = ExtResource("8_box")
+faction = 1
+
+[node name="FloorFar" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.95, -0.5, -12)
+size = Vector3(16.1, 1, 4)
+script = ExtResource("3_world")
+
+[node name="DoorBlue" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2, -12)
+script = ExtResource("7_door")
+plate_path = NodePath("../PlateBlue")
+
+[node name="Panel" type="CSGBox3D" parent="DoorBlue"]
+size = Vector3(1, 4, 4)
+script = ExtResource("3_world")
+
+[node name="Goal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 1, -12)
+script = ExtResource("11_goal")
+
+[node name="Core" type="CSGCylinder3D" parent="Goal"]
+radius = 0.3
+material = SubResource("StandardMaterial3D_core")
+
+[node name="ExitLabel" type="Label3D" parent="Goal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+pixel_size = 0.012
+no_depth_test = true
+text = "EXIT"
+font_size = 48
+outline_size = 10
+
+[node name="TextPush" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.2, 0)
+pixel_size = 0.012
+no_depth_test = true
+text = "CONTAINMENT STORAGE
+Walk into the blue box to push it
+Put it on the blue plate"
+font_size = 40
+outline_size = 10
+
+[node name="TextGap" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3.2, 0)
+pixel_size = 0.012
+no_depth_test = true
+text = "Too deep to reach in 2.5D.
+Q  -  2D ignores depth: walk across!
+(hop over the little barrier)"
+font_size = 40
+outline_size = 10
+
+[node name="TextVanish" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 6.2, -12)
+pixel_size = 0.012
+no_depth_test = true
+text = "Boxes only exist in ONE view.
+The blue box vanished in 2D - the door shut.
+Press Q to return to 2.5D: it's back!"
+font_size = 40
+outline_size = 10
+
+[node name="2_5DCharacter" parent="." instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.2, 0)
+
+[node name="PerspectiveSwitcher" type="Node" parent="2_5DCharacter"]
+script = ExtResource("4_switch")
+
+[node name="Pusher" type="Node" parent="2_5DCharacter"]
+script = ExtResource("5_pusher")
+
+[node name="CameraController2_5D" parent="." instance=ExtResource("2_camera")]
+transform = Transform3D(1, 0, 0, 0, 0.9063, 0.4226, 0, -0.4226, 0.9063, 6, 7, 10)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("9_hud")
