@@ -27,6 +27,7 @@ var _fallen := false
 var _landed := false
 var _materials := {}
 var _time := 0.0
+var _hovered := ""
 var _sign_base := Vector2(0, -0.3) # where the sign is, before the wiggle
 var _sign_target := Vector2.ZERO
 var _sign_timer := 0.0
@@ -46,6 +47,7 @@ func _ready() -> void:
 		_materials[slab.name] = material
 	credits_panel.position.x = get_viewport().get_visible_rect().size.x # parked off-screen
 	credits_panel.get_node("Box/Close").pressed.connect(_set_credits.bind(false))
+	credits_panel.get_node("Box/Close").pressed.connect(Audio.play.bind("menu_back_sfx"))
 	$Quit/Landing.body_entered.connect(_on_landing)
 	PerspectiveManager.mode_changed.connect(_on_mode_changed)
 	_rng.randomize()
@@ -56,6 +58,9 @@ func _process(delta: float) -> void:
 	_time += delta
 	_wander_sign(delta)
 	var hovered := _pick(get_viewport().get_mouse_position())
+	if hovered != _hovered and hovered != "":
+		Audio.play("menu_hover_sfx")
+	_hovered = hovered
 	for slab_name in _materials:
 		_materials[slab_name].albedo_color = HOVER_COLOR if slab_name == hovered else BASE_COLOR
 
@@ -87,6 +92,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func press(slab: String) -> void:
 	if _fallen and slab != "Quit":
 		return
+	Audio.play("menu_back_sfx" if slab == "Credits" and credits_open else "menu_confirm_sfx")
 	match slab:
 		"Play":
 			get_tree().change_scene_to_file(LEVEL_SELECTOR)

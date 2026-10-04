@@ -30,6 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(_delta: float) -> void:
 	# Fell off the level: reset to 2.5D and reload the scene.
 	if body.global_position.y < FALL_LIMIT:
+		Audio.play("fail_sfx")
 		PerspectiveManager.mode = PerspectiveManager.Mode.SOLID
 		Inventory.clear()
 		get_tree().reload_current_scene()
@@ -46,6 +47,7 @@ func toggle() -> bool:
 		return false # would end up inside geometry
 	body.global_position.z = z
 	PerspectiveManager.set_mode(target)
+	Audio.play("switch2Dto2.5D_sfx" if target == solid else "switch2.5Dto2D_sfx")
 	return true
 
 

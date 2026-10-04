@@ -165,6 +165,7 @@ key_id = "green"
 [node name="OrangeKey" parent="." unique_id=163300612 instance=ExtResource("15_key")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.9, 0.5, -13.2)
 key_id = "orange"
+in_both_views = true
 reveal_by_sight = true
 
 [node name="ExitDoor" parent="." unique_id=1791386536 instance=ExtResource("13_locked_door")]

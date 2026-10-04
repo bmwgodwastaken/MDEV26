@@ -6,6 +6,9 @@ extends Interactable
 signal picked_up(key_id: String)
 
 @export var key_id := "red"
+## On = the key exists in both views (e.g. one lying in a chest). Use this, not faction = NEUTRAL: keys
+## start as SOLID in _init, and the scene editor silently drops a saved NEUTRAL (the base default).
+@export var in_both_views := false
 ## On = the key's picture stays invisible until the player can actually see it: close enough and
 ## nothing in the way. A key hidden behind a vase is then not visible at all from the front.
 @export var reveal_by_sight := false
@@ -20,6 +23,8 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	if in_both_views:
+		faction = WorldObject.Faction.NEUTRAL
 	super()
 	# The key picture is grey, so any key_id color works: tint it. No picture = colored box.
 	var pictures := find_children("*", "Sprite3D", true, false)
@@ -65,6 +70,7 @@ func get_prompt() -> String:
 
 func interact() -> void:
 	Inventory.add_key(key_id)
+	Audio.play("key_pickup_sfx")
 	picked_up.emit(key_id)
 	remove_from_group("interactable")
 	queue_free()

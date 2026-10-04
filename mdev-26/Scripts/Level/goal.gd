@@ -45,6 +45,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	_done = true
 	reached.emit()
+	Audio.play("level_success_sfx")
 	if complete_scene != "":
 		LevelFlow.next_level = next_scene
 		TimeManager.stop_timer()

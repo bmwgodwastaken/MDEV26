@@ -9,6 +9,9 @@ var COIB:RigidBody3D #Current Object In Body
 var Is_Grabbing:bool
 ## Off = the player ignores walking, jumping and grabbing (gravity still applies), e.g. during the level-end transition.
 var controls_enabled := true
+var _was_on_floor := true
+var _step_timer := 0.0
+const STEP_TIME := 0.35 # seconds between footstep sounds while walking
 
 func _ready() -> void:
 	TimeManager.start_timer()
@@ -22,6 +25,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if controls_enabled and Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		Audio.play("jump_sfx")
 	
 	# The plank we were carrying was deleted (e.g. it fell out of the world): let go.
 	if Is_Grabbing and not is_instance_valid(COIB):
@@ -33,12 +37,14 @@ func _physics_process(delta: float) -> void:
 			Is_Grabbing = false
 			COIB.freeze = false
 			COIB = null
+			Audio.play("interact_sfx")
 		else:
 			# Only something inside the grab area right now can be grabbed.
 			COIB = _nearest_grabbable()
 			if COIB:
 				Is_Grabbing = true
 				COIB.freeze = true
+				Audio.play("interact_sfx")
 
 	if Is_Grabbing:
 		COIB.global_position = grab_point.global_position
@@ -59,6 +65,18 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	_play_movement_sounds(delta)
+
+
+## Footsteps while walking on the ground, and a landing sound when the feet touch down.
+func _play_movement_sounds(delta: float) -> void:
+	if is_on_floor() and not _was_on_floor:
+		Audio.play("land_sfx")
+	_was_on_floor = is_on_floor()
+	_step_timer -= delta
+	if is_on_floor() and Vector2(velocity.x, velocity.z).length() > 0.5 and _step_timer <= 0.0:
+		Audio.play("footstep_sfx")
+		_step_timer = STEP_TIME
 
 
 ## Closest "Grabble" body inside the grab area, or null.

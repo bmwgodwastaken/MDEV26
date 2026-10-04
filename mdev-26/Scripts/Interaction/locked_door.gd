@@ -23,8 +23,11 @@ func get_prompt() -> String:
 func interact() -> void:
 	if not Inventory.has_key(key_id):
 		denied.emit(key_id)
+		Audio.play("door_locked_sfx")
 		return
 	Inventory.use_key(key_id)
+	Audio.play("key_use_sfx")
+	Audio.play("door_unlock_sfx")
 	unlocked.emit(key_id)
 	remove_from_group("interactable")
 	get_parent().queue_free()

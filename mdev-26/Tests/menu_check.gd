@@ -23,7 +23,7 @@ func _run() -> void:
 	await _frames(3)
 	assert(current_scene.name == "LevelSelector", "Play should open the level selector, got %s" % current_scene.name)
 
-	var buttons := current_scene.get_node("GridContainer").get_children()
+	var buttons := current_scene.get_node("Panel/GridContainer").get_children()
 	assert(buttons.size() >= 2, "level selector should have buttons for levels 1 and 2")
 	buttons[0].button_down.emit()
 	await _frames(3)
@@ -31,21 +31,21 @@ func _run() -> void:
 
 	_open("res://Scenes/level_selector.tscn")
 	await _frames(3)
-	current_scene.get_node("GridContainer").get_children()[1].button_down.emit()
+	current_scene.get_node("Panel/GridContainer").get_children()[1].button_down.emit()
 	await _frames(3)
 	assert(current_scene.name == "Level02VanishingBox", "button 2 should open level 2, got %s" % current_scene.name)
 
 	_open("res://Scenes/level_selector.tscn")
 	await _frames(3)
-	assert(current_scene.get_node("GridContainer").get_child_count() >= 3, "level selector should have a button for level 3")
-	current_scene.get_node("GridContainer").get_children()[2].button_down.emit()
+	assert(current_scene.get_node("Panel/GridContainer").get_child_count() >= 3, "level selector should have a button for level 3")
+	current_scene.get_node("Panel/GridContainer").get_children()[2].button_down.emit()
 	await _frames(3)
 	assert(current_scene.name == "Level03PlankBridge", "button 3 should open level 3, got %s" % current_scene.name)
 
 	_open("res://Scenes/level_selector.tscn")
 	await _frames(3)
-	assert(current_scene.get_node("GridContainer").get_child_count() >= 4, "level selector should have a button for level 4")
-	current_scene.get_node("GridContainer").get_children()[3].button_down.emit()
+	assert(current_scene.get_node("Panel/GridContainer").get_child_count() >= 4, "level selector should have a button for level 4")
+	current_scene.get_node("Panel/GridContainer").get_children()[3].button_down.emit()
 	await _frames(20) # the final level is large and takes a moment to load
 	assert(current_scene and current_scene.name == "Level04Core", "button 4 should open level 4, got %s" % current_scene.name)
 
