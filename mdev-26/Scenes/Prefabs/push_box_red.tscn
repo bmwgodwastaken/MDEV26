@@ -15,9 +15,32 @@ pixel_size = 0.0555556
 texture_filter = 0
 texture = ExtResource("2_front")
 
+[node name="Back" type="Sprite3D" parent="Picture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.505)
+modulate = Color(0.65, 0.65, 0.65, 1)
+pixel_size = 0.0555556
+texture_filter = 0
+texture = ExtResource("2_front")
+
+[node name="Left" type="Sprite3D" parent="Picture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.505, 0, 0)
+modulate = Color(0.7, 0.7, 0.7, 1)
+axis = 0
+pixel_size = 0.0555556
+texture_filter = 0
+texture = ExtResource("2_front")
+
+[node name="Right" type="Sprite3D" parent="Picture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.505, 0, 0)
+modulate = Color(0.7, 0.7, 0.7, 1)
+axis = 0
+pixel_size = 0.0555556
+texture_filter = 0
+texture = ExtResource("2_front")
+
 [node name="Top" type="Sprite3D" parent="Picture"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.505, 0)
-modulate = Color(0.8, 0.8, 0.8, 1)
+modulate = Color(0.85, 0.85, 0.85, 1)
 axis = 1
 pixel_size = 0.0555556
 texture_filter = 0
