@@ -11,7 +11,9 @@ signal denied(key_id: String)
 
 func _ready() -> void:
 	super()
-	_add_placeholder(Vector3(1.05, 0.3, 4.05), Color.from_string(key_id, Color.WHITE)) # colored band showing which key
+	var panel := get_parent().get_node_or_null("Panel")
+	var band := Vector3(1.05, 0.3, 4.05) if not panel else Vector3(panel.size.x + 0.05, 0.3, panel.size.z + 0.05)
+	_add_placeholder(band, Color.from_string(key_id, Color.WHITE)) # colored band showing which key
 
 
 func get_prompt() -> String:

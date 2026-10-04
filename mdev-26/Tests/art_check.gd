@@ -7,6 +7,7 @@ const LEVELS := [
 	"res://Scenes/Levels/level_01_tutorial.tscn",
 	"res://Scenes/Levels/level_02_vanishing_box.tscn",
 	"res://Scenes/Levels/level_03_plank_bridge.tscn",
+	"res://Scenes/Levels/level_04_core.tscn",
 ]
 
 

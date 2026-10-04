@@ -55,6 +55,7 @@ art = 1
 
 [node name="Goal" parent="." unique_id=1763513667 instance=ExtResource("31_exit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 1, -12)
+next_scene = "res://Scenes/Levels/level_04_core.tscn"
 
 [node name="PlankSpwaner" type="Node" parent="." unique_id=1387390581 node_paths=PackedStringArray("Marker3d")]
 script = ExtResource("7_spawner")

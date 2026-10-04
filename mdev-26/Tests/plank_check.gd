@@ -53,6 +53,7 @@ func _level3() -> void:
 	var level := _open("res://Scenes/Levels/level_03_plank_bridge.tscn")
 	await _frames(40)
 	var goal = level.get_node("Goal")
+	goal.next_scene = ""
 	goal.complete_scene = "" # stay in this scene for the check
 	var reached := [false]
 	goal.reached.connect(func(): reached[0] = true)

@@ -6,9 +6,11 @@ extends Node3D
 
 @export var key_id := "red"
 @export var size := Vector3(1, 4, 4)
+## How high above the floor the lock (what you press E on) sits.
+@export var lock_height := 1.0
 
 
 func _enter_tree() -> void:
 	$Panel.size = size
 	$Lock.key_id = key_id
-	$Lock.position.y = -size.y / 2.0 + 1.0 # one meter above the floor
+	$Lock.position.y = -size.y / 2.0 + lock_height
