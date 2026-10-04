@@ -1,12 +1,12 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dgj0dj0dlucwh"]
 
 [ext_resource type="PackedScene" uid="uid://k75hgw8owjyo" path="res://Scenes/2_5d_character.tscn" id="1_player"]
 [ext_resource type="PackedScene" uid="uid://hk02k3f4q5pk" path="res://Scenes/camera_controller_2_5d.tscn" id="2_camera"]
-[ext_resource type="Script" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
-[ext_resource type="Script" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
-[ext_resource type="Script" path="res://Scripts/Player/interactor.gd" id="5_interactor"]
-[ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="8_hud"]
-[ext_resource type="Script" path="res://Scripts/Level/level.gd" id="9_level"]
+[ext_resource type="Script" uid="uid://bvb4a0s7atg5a" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
+[ext_resource type="Script" uid="uid://rg8bi64774bk" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
+[ext_resource type="Script" uid="uid://bey2mymv72iof" path="res://Scripts/Player/interactor.gd" id="5_interactor"]
+[ext_resource type="Script" uid="uid://c0espd1navq62" path="res://Scripts/UI/hud.gd" id="8_hud"]
+[ext_resource type="Script" uid="uid://cm68lb4hm4cqh" path="res://Scripts/Level/level.gd" id="9_level"]
 [ext_resource type="PackedScene" path="res://Scenes/Prefabs/backdrop.tscn" id="30_backdrop"]
 [ext_resource type="PackedScene" path="res://Scenes/Prefabs/exit_flag.tscn" id="31_exit"]
 [ext_resource type="PackedScene" path="res://Scenes/Prefabs/locked_door.tscn" id="32_locked_door"]
@@ -25,63 +25,72 @@ sky_material = SubResource("ProceduralSkyMaterial_1")
 background_mode = 2
 sky = SubResource("Sky_1")
 
-[node name="Level01Tutorial" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1d0n"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[node name="Level01Tutorial" type="Node3D" unique_id=1188584701]
 script = ExtResource("9_level")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=52089164]
 environment = SubResource("Environment_1")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1706396353]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Backdrop" parent="." instance=ExtResource("30_backdrop")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2.3)
+[node name="Backdrop" parent="." unique_id=730151552 instance=ExtResource("30_backdrop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, -10.822613, -2.3)
+size = Vector2(150, 40)
 
-[node name="FloorA" type="CSGBox3D" parent="."]
+[node name="Backdrop2" parent="." unique_id=246070634 instance=ExtResource("30_backdrop")]
+transform = Transform3D(1, 0, 0, 0, 0.44299406, -0.89652455, 0, 0.89652455, 0.44299406, 26, 12.19426, 3.810572)
+size = Vector2(150, 14)
+
+[node name="FloorA" type="CSGBox3D" parent="." unique_id=1619305851]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -0.5, 0)
 size = Vector3(14, 1, 4)
 script = ExtResource("3_world")
 art = 1
 
-[node name="FloorB" type="CSGBox3D" parent="."]
+[node name="FloorB" type="CSGBox3D" parent="." unique_id=1463312072]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, -0.5, 0)
 size = Vector3(35, 1, 4)
 script = ExtResource("3_world")
 art = 1
 
-[node name="Wall" type="CSGBox3D" parent="."]
+[node name="Wall" type="CSGBox3D" parent="." unique_id=1565761330]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 2, -0.9)
 size = Vector3(1, 4, 2.2)
 script = ExtResource("3_world")
 art = 1
 
-[node name="Vase" parent="." instance=ExtResource("41_vase")]
+[node name="Vase" parent="." unique_id=863421186 instance=ExtResource("41_vase")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0.75, 0.8)
 
-[node name="RedKey" parent="." instance=ExtResource("40_key")]
+[node name="RedKey" parent="." unique_id=1219168174 instance=ExtResource("40_key")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0.25, 0.3)
 
-[node name="RedDoor" parent="." instance=ExtResource("32_locked_door")]
+[node name="RedDoor" parent="." unique_id=145405893 instance=ExtResource("32_locked_door")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 2, 0)
 
-[node name="Painting" parent="." instance=ExtResource("42_painting")]
+[node name="Painting" parent="." unique_id=1853091298 instance=ExtResource("42_painting")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 1.8, -2.15)
 
-[node name="BlueKey" parent="." instance=ExtResource("40_key")]
+[node name="BlueKey" parent="." unique_id=1021361404 instance=ExtResource("40_key")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 1.8, -2.05)
-faction = 2
 key_id = "blue"
+faction = 2
 
-[node name="BlueDoor" parent="." instance=ExtResource("32_locked_door")]
+[node name="BlueDoor" parent="." unique_id=1335238794 instance=ExtResource("32_locked_door")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 2, 0)
 key_id = "blue"
 
-[node name="Goal" parent="." instance=ExtResource("31_exit")]
+[node name="Goal" parent="." unique_id=868818738 instance=ExtResource("31_exit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 1, 0)
 next_scene = "res://Scenes/Levels/level_02_vanishing_box.tscn"
 
-[node name="TextMove" type="Label3D" parent="."]
+[node name="TextMove" type="Label3D" parent="." unique_id=1157364962]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.2, 0)
 pixel_size = 0.012
 no_depth_test = true
@@ -91,7 +100,7 @@ W / S  -  walk into the screen (2.5D)"
 font_size = 40
 outline_size = 10
 
-[node name="TextJump" type="Label3D" parent="."]
+[node name="TextJump" type="Label3D" parent="." unique_id=468282094]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0)
 pixel_size = 0.012
 no_depth_test = true
@@ -100,7 +109,7 @@ text = "SPACE  -  jump
 font_size = 40
 outline_size = 10
 
-[node name="TextSwitch" type="Label3D" parent="."]
+[node name="TextSwitch" type="Label3D" parent="." unique_id=867122892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 3.6, 0)
 pixel_size = 0.012
 no_depth_test = true
@@ -110,7 +119,7 @@ text = "Q  -  switch between 2.5D and 2D
 font_size = 40
 outline_size = 10
 
-[node name="TextVase" type="Label3D" parent="."]
+[node name="TextVase" type="Label3D" parent="." unique_id=889061130]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 3.2, 0)
 pixel_size = 0.012
 no_depth_test = true
@@ -120,7 +129,7 @@ E  -  interact / pick up"
 font_size = 40
 outline_size = 10
 
-[node name="TextPainting" type="Label3D" parent="."]
+[node name="TextPainting" type="Label3D" parent="." unique_id=35697882]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 3.8, 0)
 pixel_size = 0.012
 no_depth_test = true
@@ -129,17 +138,23 @@ Press Q and look at the painting."
 font_size = 40
 outline_size = 10
 
-[node name="2_5DCharacter" parent="." instance=ExtResource("1_player")]
+[node name="2_5DCharacter" parent="." unique_id=2020046419 instance=ExtResource("1_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.2, 0)
 
-[node name="PerspectiveSwitcher" type="Node" parent="2_5DCharacter"]
+[node name="PerspectiveSwitcher" type="Node" parent="2_5DCharacter" unique_id=1046233632]
 script = ExtResource("4_switch")
 
-[node name="Interactor" type="Node" parent="2_5DCharacter"]
+[node name="Interactor" type="Node" parent="2_5DCharacter" unique_id=462733697]
 script = ExtResource("5_interactor")
 
-[node name="CameraController2_5D" parent="." instance=ExtResource("2_camera")]
+[node name="CameraController2_5D" parent="." unique_id=1716508547 instance=ExtResource("2_camera")]
 transform = Transform3D(1, 0, 0, 0, 0.9063, 0.4226, 0, -0.4226, 0.9063, 6, 7, 10)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=483251311]
 script = ExtResource("8_hud")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1973715179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, -10.822613, -2.6748018)
+use_collision = true
+size = Vector3(100, 40, 1)
+material = SubResource("StandardMaterial3D_g1d0n")

@@ -10,6 +10,9 @@ var Is_Grabbing:bool
 ## Off = the player ignores walking, jumping and grabbing (gravity still applies), e.g. during the level-end transition.
 var controls_enabled := true
 
+func _ready() -> void:
+	TimeManager.start_timer()
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

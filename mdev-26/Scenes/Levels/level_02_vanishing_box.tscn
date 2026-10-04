@@ -1,12 +1,12 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bmyxhk0as88ma"]
 
 [ext_resource type="PackedScene" uid="uid://k75hgw8owjyo" path="res://Scenes/2_5d_character.tscn" id="1_player"]
 [ext_resource type="PackedScene" uid="uid://hk02k3f4q5pk" path="res://Scenes/camera_controller_2_5d.tscn" id="2_camera"]
-[ext_resource type="Script" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
-[ext_resource type="Script" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
-[ext_resource type="Script" path="res://Scripts/Player/pusher.gd" id="5_pusher"]
-[ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="9_hud"]
-[ext_resource type="Script" path="res://Scripts/Level/level.gd" id="10_level"]
+[ext_resource type="Script" uid="uid://bvb4a0s7atg5a" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
+[ext_resource type="Script" uid="uid://rg8bi64774bk" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
+[ext_resource type="Script" uid="uid://b01xoyow44vy2" path="res://Scripts/Player/pusher.gd" id="5_pusher"]
+[ext_resource type="Script" uid="uid://c0espd1navq62" path="res://Scripts/UI/hud.gd" id="9_hud"]
+[ext_resource type="Script" uid="uid://cm68lb4hm4cqh" path="res://Scripts/Level/level.gd" id="10_level"]
 [ext_resource type="PackedScene" path="res://Scenes/Prefabs/backdrop.tscn" id="30_backdrop"]
 [ext_resource type="PackedScene" path="res://Scenes/Prefabs/exit_flag.tscn" id="31_exit"]
 [ext_resource type="PackedScene" path="res://Scenes/Prefabs/plate_door.tscn" id="33_plate_door"]
@@ -24,53 +24,54 @@ sky_material = SubResource("ProceduralSkyMaterial_1")
 background_mode = 2
 sky = SubResource("Sky_1")
 
-[node name="Level02VanishingBox" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8dub"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[node name="Level02VanishingBox" type="Node3D" unique_id=947820014]
 script = ExtResource("10_level")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=571490031]
 environment = SubResource("Environment_1")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2086737197]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Backdrop" parent="." instance=ExtResource("30_backdrop")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -14.3)
-
-[node name="FloorNear" type="CSGBox3D" parent="."]
+[node name="FloorNear" type="CSGBox3D" parent="." unique_id=1169565369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 0)
 size = Vector3(12, 1, 4)
 script = ExtResource("3_world")
 art = 1
 
-[node name="Stopper" type="CSGBox3D" parent="."]
+[node name="Stopper" type="CSGBox3D" parent="." unique_id=640047423]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8, 0.3, 0)
 size = Vector3(0.4, 0.6, 4)
 script = ExtResource("3_world")
 art = 1
 
-[node name="PlateBlue" parent="." instance=ExtResource("44_plate")]
+[node name="PlateBlue" parent="." unique_id=208867546 instance=ExtResource("44_plate")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, 0, 0.8)
 tint = Color(0.25, 0.45, 1, 1)
 
-[node name="BlueBox" parent="." instance=ExtResource("43_box_blue")]
+[node name="BlueBox" parent="." unique_id=1301427809 instance=ExtResource("43_box_blue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.55, 0.8)
 
-[node name="FloorFar" type="CSGBox3D" parent="."]
+[node name="FloorFar" type="CSGBox3D" parent="." unique_id=1947288172]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.95, -0.5, -12)
 size = Vector3(16.1, 1, 4)
 script = ExtResource("3_world")
 art = 1
 
-[node name="DoorBlue" parent="." instance=ExtResource("33_plate_door")]
+[node name="DoorBlue" parent="." unique_id=1315301411 instance=ExtResource("33_plate_door")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2, -12)
 plate_path = NodePath("../PlateBlue")
 
-[node name="Goal" parent="." instance=ExtResource("31_exit")]
+[node name="Goal" parent="." unique_id=698486329 instance=ExtResource("31_exit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 1, -12)
 next_scene = "res://Scenes/Levels/level_03_plank_bridge.tscn"
 
-[node name="TextPush" type="Label3D" parent="."]
+[node name="TextPush" type="Label3D" parent="." unique_id=469454895]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.2, 0)
 pixel_size = 0.012
 no_depth_test = true
@@ -80,7 +81,7 @@ Put it on the blue plate"
 font_size = 40
 outline_size = 10
 
-[node name="TextGap" type="Label3D" parent="."]
+[node name="TextGap" type="Label3D" parent="." unique_id=2072405650]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3.2, 0)
 pixel_size = 0.012
 no_depth_test = true
@@ -90,7 +91,7 @@ Q  -  2D ignores depth: walk across!
 font_size = 40
 outline_size = 10
 
-[node name="TextVanish" type="Label3D" parent="."]
+[node name="TextVanish" type="Label3D" parent="." unique_id=1983893925]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 6.2, -12)
 pixel_size = 0.012
 no_depth_test = true
@@ -100,17 +101,31 @@ Press Q to return to 2.5D: it's back!"
 font_size = 40
 outline_size = 10
 
-[node name="2_5DCharacter" parent="." instance=ExtResource("1_player")]
+[node name="2_5DCharacter" parent="." unique_id=446504404 instance=ExtResource("1_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.2, 0)
 
-[node name="PerspectiveSwitcher" type="Node" parent="2_5DCharacter"]
+[node name="PerspectiveSwitcher" type="Node" parent="2_5DCharacter" unique_id=1478220801]
 script = ExtResource("4_switch")
 
-[node name="Pusher" type="Node" parent="2_5DCharacter"]
+[node name="Pusher" type="Node" parent="2_5DCharacter" unique_id=1078150629]
 script = ExtResource("5_pusher")
 
-[node name="CameraController2_5D" parent="." instance=ExtResource("2_camera")]
+[node name="CameraController2_5D" parent="." unique_id=520195153 instance=ExtResource("2_camera")]
 transform = Transform3D(1, 0, 0, 0, 0.9063, 0.4226, 0, -0.4226, 0.9063, 6, 7, 10)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1480457648]
 script = ExtResource("9_hud")
+
+[node name="Backdrop" parent="." unique_id=904617418 instance=ExtResource("30_backdrop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, -10.822613, -14.394091)
+size = Vector2(100, 40)
+
+[node name="Backdrop2" parent="." unique_id=334875396 instance=ExtResource("30_backdrop")]
+transform = Transform3D(1, 0, 0, 0, 0.44299406, -0.89652455, 0, 0.89652455, 0.44299406, 26, 12.9210205, -7.509548)
+size = Vector2(100, 17)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=112257869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, -10.822613, -14.797644)
+use_collision = true
+size = Vector3(100, 40, 1)
+material = SubResource("StandardMaterial3D_s8dub")

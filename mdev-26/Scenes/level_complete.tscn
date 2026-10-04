@@ -1,14 +1,19 @@
 [gd_scene format=3 uid="uid://bq3a843t83cx4"]
 
 [ext_resource type="Script" uid="uid://cemvr3xkf4vh2" path="res://Scripts/Base_level_Button.gd" id="1_u5kwf"]
-[ext_resource type="Script" path="res://Scripts/UI/next_level_button.gd" id="2_next"]
-[ext_resource type="Script" path="res://Scripts/UI/level_complete.gd" id="3_complete"]
+[ext_resource type="Script" uid="uid://dexe3g0d2ay5d" path="res://Scripts/UI/next_level_button.gd" id="2_next"]
+[ext_resource type="Script" uid="uid://d1cmet4f1ir7p" path="res://Scenes/FinishingTime.gd" id="2_xuta2"]
+[ext_resource type="Script" uid="uid://ofib1d8pa8in" path="res://Scripts/UI/level_complete.gd" id="3_complete"]
 
 [node name="LevelComplete" type="Control" unique_id=445623002]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -24.0
+offset_right = 6.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_complete")
@@ -21,6 +26,16 @@ offset_right = 820.0
 offset_bottom = 200.0
 theme_override_font_sizes/font_size = 64
 text = "Level Complete!"
+
+[node name="Label2" type="Label" parent="." unique_id=833342373]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 193.0
+offset_right = 820.0
+offset_bottom = 238.0
+theme_override_font_sizes/font_size = 32
+text = "Time Completed:"
+script = ExtResource("2_xuta2")
 
 [node name="Button" type="Button" parent="." unique_id=1809528986]
 layout_mode = 0

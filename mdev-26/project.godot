@@ -19,6 +19,7 @@ config/icon="res://Assets/2D/icon.svg"
 
 PerspectiveManager="*res://Scripts/Perspective/perspective_manager.gd"
 Inventory="*res://Scripts/Interaction/inventory.gd"
+TimeManager="*uid://0h1yv30p6yp1"
 
 [display]
 

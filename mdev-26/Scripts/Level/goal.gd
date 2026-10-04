@@ -47,6 +47,7 @@ func _physics_process(_delta: float) -> void:
 	reached.emit()
 	if complete_scene != "":
 		LevelFlow.next_level = next_scene
+		TimeManager.stop_timer()
 		_play_transition(player)
 	elif next_scene != "":
 		get_tree().change_scene_to_file.call_deferred(next_scene)
