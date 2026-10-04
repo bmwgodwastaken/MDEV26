@@ -18,8 +18,8 @@ config/icon="res://Assets/2D/icon.svg"
 
 [autoload]
 
-PerspectiveManager="*res://Scripts/perspective_manager.gd"
-Inventory="*res://Scripts/inventory.gd"
+PerspectiveManager="*res://Scripts/Perspective/perspective_manager.gd"
+Inventory="*res://Scripts/Interaction/inventory.gd"
 
 [display]
 

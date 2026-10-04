@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bg2s4ll73jet2"]
 
-[ext_resource type="Script" uid="uid://cemvr3xkf4vh2" path="res://Scripts/Base_level_Button.gd" id="1_y2vlo"]
+[ext_resource type="Script" uid="uid://of7kpo5m0de8" path="res://Scripts/UI/base_level_button.gd" id="1_y2vlo"]
 
 [node name="BaseLevelButton" type="Button" unique_id=332489755]
 custom_minimum_size = Vector2(128, 128)
@@ -8,3 +8,5 @@ custom_maximum_size = Vector2(128, 128)
 theme_override_font_sizes/font_size = 72
 text = "1"
 script = ExtResource("1_y2vlo")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]

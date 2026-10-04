@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://k75hgw8owjyo" path="res://Scenes/2_5d_character.tscn" id="1_player"]
 [ext_resource type="PackedScene" uid="uid://hk02k3f4q5pk" path="res://Scenes/camera_controller_2_5d.tscn" id="2_camera"]
-[ext_resource type="Script" uid="uid://bvb4a0s7atg5a" path="res://Scripts/world_object.gd" id="3_world"]
-[ext_resource type="Script" uid="uid://rg8bi64774bk" path="res://Scripts/perspective_switcher.gd" id="4_switch"]
-[ext_resource type="Script" uid="uid://bey2mymv72iof" path="res://Scripts/interactor.gd" id="5_interactor"]
-[ext_resource type="Script" uid="uid://blkh6squha5pg" path="res://Scripts/key_pickup.gd" id="6_key"]
-[ext_resource type="Script" uid="uid://b7qdwlgjxtvee" path="res://Scripts/locked_door.gd" id="7_door"]
-[ext_resource type="Script" uid="uid://c0espd1navq62" path="res://Scripts/hud.gd" id="8_hud"]
+[ext_resource type="Script" uid="uid://bvb4a0s7atg5a" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
+[ext_resource type="Script" uid="uid://rg8bi64774bk" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
+[ext_resource type="Script" path="res://Scripts/Player/interactor.gd" id="5_interactor"]
+[ext_resource type="Script" path="res://Scripts/Interaction/key_pickup.gd" id="6_key"]
+[ext_resource type="Script" path="res://Scripts/Interaction/locked_door.gd" id="7_door"]
+[ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="8_hud"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

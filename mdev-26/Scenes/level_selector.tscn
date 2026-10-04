@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://2had4nuxy500"]
 
 [ext_resource type="PackedScene" uid="uid://bg2s4ll73jet2" path="res://Scenes/base_level_button.tscn" id="1_22lal"]
-[ext_resource type="Script" uid="uid://cemvr3xkf4vh2" path="res://Scripts/Base_level_Button.gd" id="2_x3xpc"]
-
-[sub_resource type="GDScript" id="GDScript_x3xpc"]
 
 [node name="LevelSelector" type="Control" unique_id=1270235092]
 layout_mode = 3
@@ -12,7 +9,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_x3xpc")
 
 [node name="Label" type="Label" parent="." unique_id=655785143]
 layout_mode = 0
@@ -32,5 +28,4 @@ columns = 8
 
 [node name="BaseLevelButton" parent="GridContainer" unique_id=332489755 instance=ExtResource("1_22lal")]
 layout_mode = 2
-script = ExtResource("2_x3xpc")
-LevelToLoad = "uid://b45qhtg330dtx"
+Button_path = "uid://b45qhtg330dtx"
