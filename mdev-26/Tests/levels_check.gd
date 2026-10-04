@@ -70,9 +70,12 @@ func _level1() -> void:
 	await _place(Vector3(29, 1.1, 1.8))
 	assert(interactor.find_target() == null, "vase hides the red key from the front")
 	await _place(Vector3(29, 1.1, -1.0))
+	await _frames(30) # the key picture fades in once it can be seen
 	var key = interactor.find_target()
 	assert(key and key.name == "RedKey", "red key reachable from behind the vase")
-	assert(key.get_node("Picture").modulate.is_equal_approx(Color.RED), "the key picture is tinted with its key_id color")
+	var tint: Color = key.get_node("Picture").modulate
+	assert(is_equal_approx(tint.r, 1.0) and tint.g < 0.1 and tint.b < 0.1, "the key picture is tinted with its key_id color")
+	assert(tint.a > 0.9, "the key picture is visible once you are behind the vase")
 	assert(level.get_node("Vase/Picture").modulate.a < 1.0, "vase picture fades when player is behind it")
 	key.interact()
 	assert(inventory.has_key("red"), "red key picked up")

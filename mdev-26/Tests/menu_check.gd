@@ -42,6 +42,13 @@ func _run() -> void:
 	await _frames(3)
 	assert(current_scene.name == "Level03PlankBridge", "button 3 should open level 3, got %s" % current_scene.name)
 
+	_open("res://Scenes/level_selector.tscn")
+	await _frames(3)
+	assert(current_scene.get_node("GridContainer").get_child_count() >= 4, "level selector should have a button for level 4")
+	current_scene.get_node("GridContainer").get_children()[3].button_down.emit()
+	await _frames(20) # the final level is large and takes a moment to load
+	assert(current_scene and current_scene.name == "Level04Core", "button 4 should open level 4, got %s" % current_scene.name)
+
 	# Credits slide in and out.
 	menu = _open("res://Scenes/main_menu.tscn")
 	await _frames(3)

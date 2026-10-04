@@ -88,9 +88,16 @@ func _run() -> void:
 	await _frames(20)
 	assert(current_scene.name == "Level03PlankBridge", "Next Level should open level 3, got %s" % current_scene.name)
 
-	# Last level: the screen has no Next Level button, and Main Menu works.
+	# Level 3 exit -> Next Level opens the final level.
 	await _finish_level()
 	assert(current_scene.name == "LevelComplete", "level 3 exit should open the Level Complete screen")
+	current_scene.get_node("Button2").pressed.emit()
+	await _frames(20)
+	assert(current_scene.name == "Level04Core", "Next Level should open level 4, got %s" % current_scene.name)
+
+	# Last level: the screen has no Next Level button, and Main Menu works.
+	await _finish_level()
+	assert(current_scene.name == "LevelComplete", "level 4 exit should open the Level Complete screen")
 	assert(not current_scene.get_node("Button2").visible, "no Next Level after the last level")
 	current_scene.get_node("Button").button_down.emit()
 	await _frames(20)

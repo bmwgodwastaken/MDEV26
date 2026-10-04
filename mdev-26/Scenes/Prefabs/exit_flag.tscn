@@ -7,6 +7,7 @@
 
 [node name="ExitFlag" type="Node3D"]
 script = ExtResource("1_goal")
+radius = 2.0
 
 [node name="Flag" type="Sprite3D" parent="."]
 pixel_size = 0.08

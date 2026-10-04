@@ -5,6 +5,7 @@ extends Node
 const SOLID_LAYER := 1
 const FLAT_LAYER := 2
 const FALL_LIMIT := -20.0
+const FLOOR_SEARCH := 8.0 # how far below the player to look for the floor when switching back to 2.5D
 
 @onready var body: CharacterBody3D = get_parent()
 @onready var _shape_node: CollisionShape3D = body.find_children("*", "CollisionShape3D", false)[0]
@@ -56,19 +57,25 @@ func _apply(mode: PerspectiveManager.Mode) -> void:
 	body.velocity.z = 0.0
 
 
-## Going back to 2.5D: move onto the real depth of whatever we're standing on in 2D.
+## Going back to 2.5D: move onto the real depth of the floor below us in 2D.
+## Looks well below (works in mid-air too) and looks through boxes and planks to the floor under them.
 func _floor_depth(z: float) -> float:
 	var from := body.global_position
-	var ray := PhysicsRayQueryParameters3D.create(from, from + Vector3.DOWN * 1.5)
+	var ray := PhysicsRayQueryParameters3D.create(from, from + Vector3.DOWN * FLOOR_SEARCH)
 	ray.collision_mask = 1 << (FLAT_LAYER - 1)
-	ray.exclude = [body.get_rid()]
-	var hit := body.get_world_3d().direct_space_state.intersect_ray(ray)
-	var piece := (hit.collider.get_parent() as GeometryInstance3D) if hit else null
-	if not piece:
-		return z
-	var box := piece.global_transform * piece.get_aabb()
-	var margin := minf(0.5, box.size.z / 2.0)
-	return clampf(z, box.position.z + margin, box.end.z - margin)
+	var skip: Array[RID] = [body.get_rid()]
+	for i in 4:
+		ray.exclude = skip
+		var hit := body.get_world_3d().direct_space_state.intersect_ray(ray)
+		if hit.is_empty():
+			return z
+		var piece := hit.collider.get_parent() as GeometryInstance3D
+		if piece: # a level piece (floor): move onto its depth
+			var box := piece.global_transform * piece.get_aabb()
+			var margin := minf(0.5, box.size.z / 2.0)
+			return clampf(z, box.position.z + margin, box.end.z - margin)
+		skip.append(hit.collider.get_rid()) # a box or plank: look further down
+	return z
 
 
 func _blocked(mode: PerspectiveManager.Mode, z: float) -> bool:
