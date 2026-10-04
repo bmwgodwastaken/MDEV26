@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/Interaction/key_door.gd" id="1_keydoor"]
+[ext_resource type="Script" path="res://Scripts/Perspective/world_object.gd" id="2_world"]
+[ext_resource type="Script" path="res://Scripts/Interaction/locked_door.gd" id="3_lock"]
+
+[node name="LockedDoor" type="Node3D"]
+script = ExtResource("1_keydoor")
+
+[node name="Panel" type="CSGBox3D" parent="."]
+size = Vector3(1, 4, 4)
+script = ExtResource("2_world")
+art = 2
+
+[node name="Lock" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("3_lock")
+interact_range = 2.0

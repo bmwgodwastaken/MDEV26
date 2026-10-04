@@ -5,11 +5,14 @@
 [ext_resource type="Script" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
 [ext_resource type="Script" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
 [ext_resource type="Script" path="res://Scripts/Player/interactor.gd" id="5_interactor"]
-[ext_resource type="Script" path="res://Scripts/Interaction/key_pickup.gd" id="6_key"]
-[ext_resource type="Script" path="res://Scripts/Interaction/locked_door.gd" id="7_door"]
 [ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="8_hud"]
 [ext_resource type="Script" path="res://Scripts/Level/level.gd" id="9_level"]
-[ext_resource type="Script" path="res://Scripts/Level/goal.gd" id="10_goal"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/backdrop.tscn" id="30_backdrop"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/exit_flag.tscn" id="31_exit"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/locked_door.tscn" id="32_locked_door"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/key.tscn" id="40_key"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/vase.tscn" id="41_vase"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/painting.tscn" id="42_painting"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -22,15 +25,6 @@ sky_material = SubResource("ProceduralSkyMaterial_1")
 background_mode = 2
 sky = SubResource("Sky_1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_backdrop"]
-albedo_color = Color(0.2, 0.24, 0.3, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_painting"]
-albedo_color = Color(0.45, 0.3, 0.15, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_core"]
-albedo_color = Color(1, 0.85, 0.1, 1)
-
 [node name="Level01Tutorial" type="Node3D"]
 script = ExtResource("9_level")
 
@@ -41,88 +35,51 @@ environment = SubResource("Environment_1")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Backdrop" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 3, -2.3)
-size = Vector3(56, 8, 0.2)
-material = SubResource("StandardMaterial3D_backdrop")
+[node name="Backdrop" parent="." instance=ExtResource("30_backdrop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2.3)
 
 [node name="FloorA" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -0.5, 0)
 size = Vector3(14, 1, 4)
 script = ExtResource("3_world")
+art = 1
 
 [node name="FloorB" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, -0.5, 0)
 size = Vector3(35, 1, 4)
 script = ExtResource("3_world")
+art = 1
 
 [node name="Wall" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 2, -0.9)
 size = Vector3(1, 4, 2.2)
 script = ExtResource("3_world")
+art = 1
 
-[node name="Vase" type="CSGCylinder3D" parent="."]
+[node name="Vase" parent="." instance=ExtResource("41_vase")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0.75, 0.8)
-radius = 0.4
-height = 1.5
-script = ExtResource("3_world")
-faction = 1
-ghost = false
-fade_when_player_behind = true
 
-[node name="RedKey" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0.4, 0)
-script = ExtResource("6_key")
-interact_range = 2.0
+[node name="RedKey" parent="." instance=ExtResource("40_key")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0.25, 0.3)
 
-[node name="RedDoor" type="CSGBox3D" parent="."]
+[node name="RedDoor" parent="." instance=ExtResource("32_locked_door")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 2, 0)
-size = Vector3(1, 4, 4)
-script = ExtResource("3_world")
 
-[node name="Lock" type="Node3D" parent="RedDoor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-script = ExtResource("7_door")
-interact_range = 2.0
-
-[node name="Painting" type="CSGBox3D" parent="."]
+[node name="Painting" parent="." instance=ExtResource("42_painting")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 1.8, -2.15)
-size = Vector3(1.4, 1, 0.05)
-material = SubResource("StandardMaterial3D_painting")
 
-[node name="BlueKey" type="Node3D" parent="."]
+[node name="BlueKey" parent="." instance=ExtResource("40_key")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 1.8, -2.05)
-script = ExtResource("6_key")
 faction = 2
 key_id = "blue"
 
-[node name="BlueDoor" type="CSGBox3D" parent="."]
+[node name="BlueDoor" parent="." instance=ExtResource("32_locked_door")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 2, 0)
-size = Vector3(1, 4, 4)
-script = ExtResource("3_world")
-
-[node name="Lock" type="Node3D" parent="BlueDoor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-script = ExtResource("7_door")
-interact_range = 2.0
 key_id = "blue"
 
-[node name="Goal" type="Node3D" parent="."]
+[node name="Goal" parent="." instance=ExtResource("31_exit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 1, 0)
-script = ExtResource("10_goal")
 next_scene = "res://Scenes/Levels/level_02_vanishing_box.tscn"
-
-[node name="Core" type="CSGCylinder3D" parent="Goal"]
-radius = 0.3
-material = SubResource("StandardMaterial3D_core")
-
-[node name="ExitLabel" type="Label3D" parent="Goal"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-pixel_size = 0.012
-no_depth_test = true
-text = "EXIT"
-font_size = 48
-outline_size = 10
 
 [node name="TextMove" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.2, 0)

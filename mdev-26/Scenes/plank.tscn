@@ -1,18 +1,38 @@
 [gd_scene format=3 uid="uid://ivel3ia234p"]
 
 [ext_resource type="Script" uid="uid://bd4c5vkc17hky" path="res://Scripts/plank.gd" id="1_t6gv0"]
+[ext_resource type="Texture2D" path="res://Assets/Art/plank_25d.png" id="2_top"]
+[ext_resource type="Texture2D" path="res://Assets/Art/plank_2d.png" id="3_side"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o38xi"]
 size = Vector3(8.756706, 0.092285156, 0.8977127)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cxi8c"]
-albedo_color = Color(0.57113767, 0.37080312, 0.10380932, 1)
+albedo_color = Color(0.2, 0.15, 0.13, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o38xi"]
 points = PackedVector3Array(-4.378353, -0.046142578, -0.44885635, -4.378353, 0.046142578, -0.44885635, 4.378353, -0.046142578, -0.44885635, -4.378353, -0.046142578, 0.44885635, -4.378353, 0.046142578, 0.44885635, 4.378353, 0.046142578, -0.44885635, 4.378353, -0.046142578, 0.44885635, 4.378353, 0.046142578, 0.44885635)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_flat"]
 size = Vector3(8.756706, 0.092285156, 1000)
+
+[sub_resource type="QuadMesh" id="QuadMesh_top"]
+size = Vector2(8.756706, 0.8977127)
+
+[sub_resource type="QuadMesh" id="QuadMesh_side"]
+size = Vector2(8.756706, 0.092285156)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_top"]
+shading_mode = 0
+albedo_texture = ExtResource("2_top")
+uv1_scale = Vector3(6.84, 1.4, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_side"]
+shading_mode = 0
+albedo_texture = ExtResource("3_side")
+uv1_scale = Vector3(6.84, 1, 1)
+texture_filter = 0
 
 [node name="Plank" type="RigidBody3D" unique_id=1680490436 groups=["Grabble"]]
 axis_lock_angular_x = true
@@ -24,6 +44,24 @@ script = ExtResource("1_t6gv0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.368367, 0, 0)
 mesh = SubResource("BoxMesh_o38xi")
 surface_material_override/0 = SubResource("StandardMaterial3D_cxi8c")
+
+[node name="ArtTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -4.368367, 0.051, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_top")
+surface_material_override/0 = SubResource("StandardMaterial3D_top")
+
+[node name="ArtFront" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.368367, 0, 0.4539)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_side")
+surface_material_override/0 = SubResource("StandardMaterial3D_side")
+
+[node name="ArtBack" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.368367, 0, -0.4539)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_side")
+surface_material_override/0 = SubResource("StandardMaterial3D_side")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1770316571]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.368367, 0, 0)

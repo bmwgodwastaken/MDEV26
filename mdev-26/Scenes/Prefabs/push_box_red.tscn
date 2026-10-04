@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/Puzzles/push_box.gd" id="1_box"]
+[ext_resource type="Texture2D" path="res://Assets/Art/box_2d.png" id="2_front"]
+
+[node name="PushBoxRed" type="CharacterBody3D"]
+script = ExtResource("1_box")
+faction = 2
+
+[node name="Picture" type="Node3D" parent="."]
+
+[node name="Front" type="Sprite3D" parent="Picture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.505)
+pixel_size = 0.0555556
+texture_filter = 0
+texture = ExtResource("2_front")
+
+[node name="Top" type="Sprite3D" parent="Picture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.505, 0)
+modulate = Color(0.8, 0.8, 0.8, 1)
+axis = 1
+pixel_size = 0.0555556
+texture_filter = 0
+texture = ExtResource("2_front")

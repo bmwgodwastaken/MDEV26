@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bq3a843t83cx4"]
 
 [ext_resource type="Script" uid="uid://cemvr3xkf4vh2" path="res://Scripts/Base_level_Button.gd" id="1_u5kwf"]
+[ext_resource type="Script" path="res://Scripts/UI/next_level_button.gd" id="2_next"]
+[ext_resource type="Script" path="res://Scripts/UI/level_complete.gd" id="3_complete"]
 
 [node name="LevelComplete" type="Control" unique_id=445623002]
 layout_mode = 3
@@ -9,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_complete")
 
 [node name="Label" type="Label" parent="." unique_id=836471572]
 layout_mode = 0
@@ -36,5 +39,4 @@ offset_top = 526.0
 offset_right = 695.0
 offset_bottom = 583.0
 text = "Next Level"
-script = ExtResource("1_u5kwf")
-LevelToLoad = "uid://cxadqg4g4yoik"
+script = ExtResource("2_next")

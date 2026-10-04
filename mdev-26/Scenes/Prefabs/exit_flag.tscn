@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/Level/goal.gd" id="1_goal"]
+[ext_resource type="Texture2D" path="res://Assets/Art/flag_25d.png" id="2_flag25"]
+[ext_resource type="Texture2D" path="res://Assets/Art/flag_2d.png" id="3_flag2d"]
+[ext_resource type="Script" path="res://Scripts/Art/view_sprite.gd" id="4_viewsprite"]
+
+[node name="ExitFlag" type="Node3D"]
+script = ExtResource("1_goal")
+
+[node name="Flag" type="Sprite3D" parent="."]
+pixel_size = 0.08
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("2_flag25")
+script = ExtResource("4_viewsprite")
+texture_25d = ExtResource("2_flag25")
+texture_2d = ExtResource("3_flag2d")
+ground_y = -1.0
+
+[node name="ExitLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+pixel_size = 0.012
+no_depth_test = true
+text = "EXIT"
+font_size = 48
+outline_size = 10

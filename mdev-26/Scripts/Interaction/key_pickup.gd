@@ -14,7 +14,12 @@ func _init() -> void:
 
 func _ready() -> void:
 	super()
-	_add_placeholder(Vector3(0.3, 0.3, 0.3), Color.from_string(key_id, Color.WHITE))
+	# The key picture is grey, so any key_id color works: tint it. No picture = colored box.
+	var pictures := find_children("*", "Sprite3D", true, false)
+	for picture in pictures:
+		picture.modulate = Color.from_string(key_id, Color.WHITE)
+	if pictures.is_empty():
+		_add_placeholder(Vector3(0.3, 0.3, 0.3), Color.from_string(key_id, Color.WHITE))
 
 
 func get_prompt() -> String:

@@ -47,7 +47,8 @@ func _level1() -> void:
 	var level := await _load("res://Scenes/Levels/level_01_tutorial.tscn")
 	_assert_no_text_overlap(level)
 	var goal = level.get_node("Goal")
-	goal.next_scene = "" # stay in this scene for the check
+	goal.next_scene = ""
+	goal.complete_scene = "" # stay in this scene for the check
 	var reached := [false]
 	goal.reached.connect(func(): reached[0] = true)
 
@@ -71,7 +72,8 @@ func _level1() -> void:
 	await _place(Vector3(29, 1.1, -1.0))
 	var key = interactor.find_target()
 	assert(key and key.name == "RedKey", "red key reachable from behind the vase")
-	assert(level.get_node("Vase")._material.albedo_color.a < 1.0, "vase fades when player is behind it")
+	assert(key.get_node("Picture").modulate.is_equal_approx(Color.RED), "the key picture is tinted with its key_id color")
+	assert(level.get_node("Vase/Picture").modulate.a < 1.0, "vase picture fades when player is behind it")
 	key.interact()
 	assert(inventory.has_key("red"), "red key picked up")
 
@@ -111,7 +113,8 @@ func _level2() -> void:
 	_assert_no_text_overlap(level)
 	assert(not inventory.has_key("red") and root.get_node("PerspectiveManager").mode == 0, "new level starts clean in 2.5D")
 	var goal = level.get_node("Goal")
-	goal.next_scene = "" # stay in this scene for the check
+	goal.next_scene = ""
+	goal.complete_scene = "" # stay in this scene for the check
 	var reached := [false]
 	goal.reached.connect(func(): reached[0] = true)
 	var box = level.get_node("BlueBox")
@@ -126,11 +129,14 @@ func _level2() -> void:
 	Input.action_release("right")
 	assert(box.global_position.x > 10.5, "box pushed to the plate, x=%s" % box.global_position.x)
 	assert(plate.pressed and not door.visible, "plate pressed, door open in 2.5D")
+	assert(plate.get_node("Pressed").visible and not plate.get_node("Released").visible, "plate shows its pressed picture")
 
 	# 2D: the box vanishes and the door closes; cross the gap.
 	assert(switcher.toggle(), "switch to 2D")
 	await _frames(5)
 	assert(not plate.pressed and door.visible, "door closes in 2D")
+	assert(plate.get_node("Released").visible and not plate.get_node("Pressed").visible, "plate shows its released picture again")
+	assert(box.get_node("Picture/Front").modulate.a < 1.0, "the blue box is a ghost in 2D")
 	await _place(Vector3(14, 1.1, 0.8))
 	await _place(Vector3(18, 1.1, 0.8))
 

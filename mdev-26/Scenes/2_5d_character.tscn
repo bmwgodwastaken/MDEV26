@@ -1,7 +1,72 @@
 [gd_scene format=3 uid="uid://k75hgw8owjyo"]
 
 [ext_resource type="Script" uid="uid://exfe0uoeaefe" path="res://Scripts/Player/2_5d_character.gd" id="1_yiqvr"]
-[ext_resource type="Texture2D" uid="uid://bei33us5cfca0" path="res://Assets/2D/icon.svg" id="2_dyk6q"]
+[ext_resource type="Texture2D" path="res://Assets/MC-static-spritesheet.png" id="2_idle"]
+[ext_resource type="Texture2D" path="res://Assets/MC-walk-spritesheet.png" id="3_walk"]
+[ext_resource type="Script" path="res://Scripts/Player/player_visual.gd" id="4_visual"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle0"]
+atlas = ExtResource("2_idle")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle1"]
+atlas = ExtResource("2_idle")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk0"]
+atlas = ExtResource("3_walk")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk1"]
+atlas = ExtResource("3_walk")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk2"]
+atlas = ExtResource("3_walk")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk3"]
+atlas = ExtResource("3_walk")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_panda"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk1")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 1.0
+}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6w285"]
 
@@ -13,9 +78,15 @@ script = ExtResource("1_yiqvr")
 grab_area = NodePath("GrabArea")
 grab_point = NodePath("GrabPoint")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=337002499]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.21899647, 0)
-texture = ExtResource("2_dyk6q")
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=337002499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+pixel_size = 0.04
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_panda")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("4_visual")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2131952699]
 shape = SubResource("CapsuleShape3D_6w285")

@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/Perspective/world_object.gd" id="1_world"]
+[ext_resource type="Texture2D" path="res://Assets/Art/vase.png" id="2_vase"]
+
+[node name="Vase" type="CSGCylinder3D"]
+radius = 0.4
+height = 1.5
+script = ExtResource("1_world")
+faction = 1
+ghost = false
+fade_when_player_behind = true
+show_box = false
+
+[node name="Picture" type="Sprite3D" parent="."]
+pixel_size = 0.0714286
+texture_filter = 0
+texture = ExtResource("2_vase")

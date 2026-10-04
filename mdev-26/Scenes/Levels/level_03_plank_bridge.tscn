@@ -5,9 +5,10 @@
 [ext_resource type="Script" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
 [ext_resource type="Script" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
 [ext_resource type="Script" path="res://Scripts/Level/level.gd" id="5_level"]
-[ext_resource type="Script" path="res://Scripts/Level/goal.gd" id="6_goal"]
 [ext_resource type="Script" path="res://Scripts/Plank_Spwaner.gd" id="7_spawner"]
 [ext_resource type="PackedScene" uid="uid://ivel3ia234p" path="res://Scenes/plank.tscn" id="8_plank"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/backdrop.tscn" id="30_backdrop"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/exit_flag.tscn" id="31_exit"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,12 +21,6 @@ sky_material = SubResource("ProceduralSkyMaterial_1")
 background_mode = 2
 sky = SubResource("Sky_1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_backdrop"]
-albedo_color = Color(0.2, 0.24, 0.3, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_core"]
-albedo_color = Color(1, 0.85, 0.1, 1)
-
 [node name="Level03PlankBridge" type="Node3D"]
 script = ExtResource("5_level")
 
@@ -36,41 +31,29 @@ environment = SubResource("Environment_1")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Backdrop" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 3, -14.3)
-size = Vector3(60, 8, 0.2)
-material = SubResource("StandardMaterial3D_backdrop")
+[node name="Backdrop" parent="." instance=ExtResource("30_backdrop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -14.3)
 
 [node name="PlatformStart" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 0)
 size = Vector3(12, 1, 4)
 script = ExtResource("3_world")
+art = 1
 
 [node name="PlatformMiddle" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8, -0.5, 0)
 size = Vector3(12.4, 1, 4)
 script = ExtResource("3_world")
+art = 1
 
 [node name="PlatformFar" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.8, -0.5, -12)
 size = Vector3(14.4, 1, 4)
 script = ExtResource("3_world")
+art = 1
 
-[node name="Goal" type="Node3D" parent="."]
+[node name="Goal" parent="." instance=ExtResource("31_exit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 1, -12)
-script = ExtResource("6_goal")
-
-[node name="Core" type="CSGCylinder3D" parent="Goal"]
-radius = 0.3
-material = SubResource("StandardMaterial3D_core")
-
-[node name="ExitLabel" type="Label3D" parent="Goal"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-pixel_size = 0.012
-no_depth_test = true
-text = "EXIT"
-font_size = 48
-outline_size = 10
 
 [node name="PlankSpwaner" type="Node" parent="." node_paths=PackedStringArray("Marker3d")]
 script = ExtResource("7_spawner")

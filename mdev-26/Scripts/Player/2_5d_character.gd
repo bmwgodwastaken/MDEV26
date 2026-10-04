@@ -7,6 +7,8 @@ const JUMP_VELOCITY = 6.5
 @export var grab_point: Marker3D
 var COIB:RigidBody3D #Current Object In Body
 var Is_Grabbing:bool
+## Off = the player ignores walking, jumping and grabbing (gravity still applies), e.g. during the level-end transition.
+var controls_enabled := true
 
 
 func _physics_process(delta: float) -> void:
@@ -15,7 +17,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if controls_enabled and Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
 	# The plank we were carrying was deleted (e.g. it fell out of the world): let go.
@@ -23,7 +25,7 @@ func _physics_process(delta: float) -> void:
 		Is_Grabbing = false
 		COIB = null
 
-	if Input.is_action_just_pressed("Pick_up"):
+	if controls_enabled and Input.is_action_just_pressed("Pick_up"):
 		if Is_Grabbing:
 			Is_Grabbing = false
 			COIB.freeze = false
@@ -44,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("left", "right", "up", "down")
+	var input_dir := Input.get_vector("left", "right", "up", "down") if controls_enabled else Vector2.ZERO
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED

@@ -15,6 +15,7 @@ const GHOST_ALPHA := 0.2
 var _start: Vector3
 var _shape := CollisionShape3D.new()
 var _material := StandardMaterial3D.new()
+@onready var _picture: Node3D = get_node_or_null("Picture") # a Node3D holding the box faces (Sprite3D)
 
 
 func _ready() -> void:
@@ -25,12 +26,13 @@ func _ready() -> void:
 	_shape.shape.size = Vector3(size.x, size.y, FLAT_DEPTH) if flat else size
 	add_child(_shape)
 	axis_lock_linear_z = flat # a 2D box only slides along X
-	var mesh := MeshInstance3D.new()
-	mesh.mesh = BoxMesh.new()
-	mesh.mesh.size = size
-	_material.albedo_color = WorldObject.COLORS[faction]
-	mesh.material_override = _material
-	add_child(mesh)
+	if not _picture: # no picture in the scene: a plain colored box
+		var mesh := MeshInstance3D.new()
+		mesh.mesh = BoxMesh.new()
+		mesh.mesh.size = size
+		_material.albedo_color = WorldObject.COLORS[faction]
+		mesh.material_override = _material
+		add_child(mesh)
 	PerspectiveManager.mode_changed.connect(_refresh.unbind(1))
 	_refresh()
 
@@ -70,4 +72,7 @@ func _refresh() -> void:
 		set_collision_mask_value(layer, true)
 	_material.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED if here else BaseMaterial3D.TRANSPARENCY_ALPHA
 	_material.albedo_color.a = 1.0 if here else GHOST_ALPHA
+	if _picture:
+		for face in _picture.find_children("*", "Sprite3D", true, false):
+			face.modulate.a = 1.0 if here else GHOST_ALPHA
 	set_physics_process(here)

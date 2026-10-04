@@ -7,3 +7,4 @@ extends Node3D
 func _enter_tree() -> void:
 	PerspectiveManager.mode = PerspectiveManager.Mode.SOLID
 	Inventory.clear()
+	LevelFlow.next_level = ""

@@ -30,7 +30,6 @@ func interact() -> void:
 
 func sight_exclude() -> Array[RID]:
 	var rids: Array[RID] = []
-	for child in get_parent().get_children():
-		if child is CollisionObject3D:
-			rids.append(child.get_rid())
+	for body in get_parent().find_children("*", "CollisionObject3D", true, false):
+		rids.append(body.get_rid())
 	return rids

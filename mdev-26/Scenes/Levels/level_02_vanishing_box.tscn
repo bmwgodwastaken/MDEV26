@@ -5,12 +5,13 @@
 [ext_resource type="Script" path="res://Scripts/Perspective/world_object.gd" id="3_world"]
 [ext_resource type="Script" path="res://Scripts/Player/perspective_switcher.gd" id="4_switch"]
 [ext_resource type="Script" path="res://Scripts/Player/pusher.gd" id="5_pusher"]
-[ext_resource type="Script" path="res://Scripts/Puzzles/pressure_plate.gd" id="6_plate"]
-[ext_resource type="Script" path="res://Scripts/Puzzles/plate_door.gd" id="7_door"]
-[ext_resource type="Script" path="res://Scripts/Puzzles/push_box.gd" id="8_box"]
 [ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="9_hud"]
 [ext_resource type="Script" path="res://Scripts/Level/level.gd" id="10_level"]
-[ext_resource type="Script" path="res://Scripts/Level/goal.gd" id="11_goal"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/backdrop.tscn" id="30_backdrop"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/exit_flag.tscn" id="31_exit"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/plate_door.tscn" id="33_plate_door"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/push_box_blue.tscn" id="43_box_blue"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/pressure_plate.tscn" id="44_plate"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,12 +24,6 @@ sky_material = SubResource("ProceduralSkyMaterial_1")
 background_mode = 2
 sky = SubResource("Sky_1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_backdrop"]
-albedo_color = Color(0.2, 0.24, 0.3, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_core"]
-albedo_color = Color(1, 0.85, 0.1, 1)
-
 [node name="Level02VanishingBox" type="Node3D"]
 script = ExtResource("10_level")
 
@@ -39,62 +34,41 @@ environment = SubResource("Environment_1")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Backdrop" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 3, -14.3)
-size = Vector3(32, 8, 0.2)
-material = SubResource("StandardMaterial3D_backdrop")
+[node name="Backdrop" parent="." instance=ExtResource("30_backdrop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -14.3)
 
 [node name="FloorNear" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 0)
 size = Vector3(12, 1, 4)
 script = ExtResource("3_world")
+art = 1
 
 [node name="Stopper" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8, 0.3, 0)
 size = Vector3(0.4, 0.6, 4)
 script = ExtResource("3_world")
+art = 1
 
-[node name="PlateBlue" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.05, 0.8)
-script = ExtResource("6_plate")
-size = Vector3(2.4, 0.1, 2)
+[node name="PlateBlue" parent="." instance=ExtResource("44_plate")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, 0, 0.8)
 tint = Color(0.25, 0.45, 1, 1)
 
-[node name="BlueBox" type="CharacterBody3D" parent="."]
+[node name="BlueBox" parent="." instance=ExtResource("43_box_blue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.55, 0.8)
-script = ExtResource("8_box")
-faction = 1
 
 [node name="FloorFar" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.95, -0.5, -12)
 size = Vector3(16.1, 1, 4)
 script = ExtResource("3_world")
+art = 1
 
-[node name="DoorBlue" type="Node3D" parent="."]
+[node name="DoorBlue" parent="." instance=ExtResource("33_plate_door")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2, -12)
-script = ExtResource("7_door")
 plate_path = NodePath("../PlateBlue")
 
-[node name="Panel" type="CSGBox3D" parent="DoorBlue"]
-size = Vector3(1, 4, 4)
-script = ExtResource("3_world")
-
-[node name="Goal" type="Node3D" parent="."]
+[node name="Goal" parent="." instance=ExtResource("31_exit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 1, -12)
-script = ExtResource("11_goal")
 next_scene = "res://Scenes/Levels/level_03_plank_bridge.tscn"
-
-[node name="Core" type="CSGCylinder3D" parent="Goal"]
-radius = 0.3
-material = SubResource("StandardMaterial3D_core")
-
-[node name="ExitLabel" type="Label3D" parent="Goal"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-pixel_size = 0.012
-no_depth_test = true
-text = "EXIT"
-font_size = 48
-outline_size = 10
 
 [node name="TextPush" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.2, 0)
