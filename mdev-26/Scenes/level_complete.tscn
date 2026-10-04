@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bq3a843t83cx4"]
+
+[ext_resource type="Script" uid="uid://cemvr3xkf4vh2" path="res://Scripts/Base_level_Button.gd" id="1_u5kwf"]
+
+[node name="LevelComplete" type="Control" unique_id=445623002]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=836471572]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 112.0
+offset_right = 820.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 64
+text = "Level Complete!"
+
+[node name="Button" type="Button" parent="." unique_id=1809528986]
+layout_mode = 0
+offset_left = 451.0
+offset_top = 458.0
+offset_right = 693.0
+offset_bottom = 515.0
+text = "Main Menu"
+script = ExtResource("1_u5kwf")
+LevelToLoad = "uid://qnc0yqsiqpv6"
+
+[node name="Button2" type="Button" parent="." unique_id=891863325]
+layout_mode = 0
+offset_left = 453.0
+offset_top = 526.0
+offset_right = 695.0
+offset_bottom = 583.0
+text = "Next Level"
+script = ExtResource("1_u5kwf")
+LevelToLoad = "uid://cxadqg4g4yoik"

@@ -1,91 +1,24 @@
 [gd_scene format=3 uid="uid://c12tj01ujoyac"]
 
-[ext_resource type="PackedScene" uid="uid://k75hgw8owjyo" path="res://Scenes/2_5d_character.tscn" id="1_r5l72"]
-[ext_resource type="PackedScene" uid="uid://hk02k3f4q5pk" path="res://Scenes/camera_controller_2_5d.tscn" id="2_50ct6"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r5l72"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6w285"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_50ct6"]
-sky_material = SubResource("ProceduralSkyMaterial_r5l72")
+[sub_resource type="Sky" id="Sky_3dogw"]
+sky_material = SubResource("ProceduralSkyMaterial_6w285")
 
-[sub_resource type="Environment" id="Environment_hb2xm"]
+[sub_resource type="Environment" id="Environment_r5l72"]
 background_mode = 2
-sky = SubResource("Sky_50ct6")
+sky = SubResource("Sky_3dogw")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpwc8"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0)
+[node name="test_scene" type="Node3D" unique_id=610807243]
 
-[node name="TestScene" type="Node3D" unique_id=341768921]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=932803810]
+environment = SubResource("Environment_r5l72")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=504717805]
-environment = SubResource("Environment_hb2xm")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=944527918]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1948859734]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=556762754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7924194, 0, 1.4927063)
-use_collision = true
-size = Vector3(10.584839, 1, 3.9854126)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1682891541]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.297123, 1.4594564, 1.4927063)
-use_collision = true
-size = Vector3(16.33722, 1, 3.9854126)
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=140424554]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.743492, 3.1415854, 2.9626312)
-use_collision = true
-size = Vector3(1.2569962, 4.364258, 1.0455627)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=339545369]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.870586, 3.1415854, 0.044348)
-use_collision = true
-size = Vector3(1.2569962, 4.364258, 1.0455627)
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="." unique_id=1277638117]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.848293, 3.1415854, 2.9880857)
-use_collision = true
-size = Vector3(1.2569962, 4.364258, 1.0455627)
-
-[node name="CSGBox3D9" type="CSGBox3D" parent="." unique_id=358102034]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.953896, 3.1415854, 1.9765046)
-use_collision = true
-size = Vector3(1.2569962, 4.364258, 1.0455627)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=604156595]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.137302, -4.771938, 1.4927063)
-use_collision = true
-size = Vector3(16.33722, 1, 3.9854126)
-
-[node name="CSGBox3D10" type="CSGBox3D" parent="." unique_id=12547836]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.824371, 2.315826, 3.665741)
-use_collision = true
-size = Vector3(62.712616, 20.738556, 0.26663208)
-material = SubResource("StandardMaterial3D_kpwc8")
-
-[node name="CSGBox3D11" type="CSGBox3D" parent="." unique_id=1813404194]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.85025, 2.9273982, -0.5982437)
-use_collision = true
-size = Vector3(62.977264, 19.515411, 0.26663208)
-material = SubResource("StandardMaterial3D_kpwc8")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1659103926]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.74587, -0.5141034, 1.4927063)
-use_collision = true
-size = Vector3(16.33722, 1, 3.9854126)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1584797722]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.632795, 1.3193278, 1.4927063)
-use_collision = true
-size = Vector3(19.368713, 1, 3.9854126)
-
-[node name="2_5DCharacter" parent="." unique_id=290764025 instance=ExtResource("1_r5l72")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625016, 1.223356, 0.89118385)
-
-[node name="CameraController2_5D" parent="." unique_id=1693983472 instance=ExtResource("2_50ct6")]
-transform = Transform3D(0.99991435, 0.00091308594, 0.013057698, 0, 0.997564, -0.06975669, -0.013089583, 0.06975071, 0.9974786, 5.215316, 2.514301, 11.196106)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=960683218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)

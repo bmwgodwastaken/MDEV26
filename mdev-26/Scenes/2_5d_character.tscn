@@ -5,11 +5,29 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6w285"]
 
-[node name="2_5DCharacter" type="CharacterBody3D" unique_id=290764025 groups=["2.5DPlayer"]]
+[sub_resource type="BoxShape3D" id="BoxShape3D_yiqvr"]
+size = Vector3(2.2610474, 3.0693817, 4.6624756)
+
+[node name="2_5DCharacter" type="CharacterBody3D" unique_id=290764025 node_paths=PackedStringArray("grab_area", "grab_point") groups=["2.5DPlayer"]]
 script = ExtResource("1_yiqvr")
+grab_area = NodePath("GrabArea")
+grab_point = NodePath("GrabPoint")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=337002499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.21899647, 0)
 texture = ExtResource("2_dyk6q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2131952699]
 shape = SubResource("CapsuleShape3D_6w285")
+
+[node name="GrabPoint" type="Marker3D" parent="." unique_id=555686202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3559937, -0.1514864, 0)
+
+[node name="GrabArea" type="Area3D" parent="." unique_id=369032097]
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabArea" unique_id=1442469974]
+shape = SubResource("BoxShape3D_yiqvr")
+
+[connection signal="body_entered" from="GrabArea" to="." method="_on_grab_area_body_entered"]
+[connection signal="body_exited" from="GrabArea" to="." method="_on_grab_area_body_exited"]

@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://b45qhtg330dtx"]
+
+[ext_resource type="Script" uid="uid://bvb4a0s7atg5a" path="res://Scripts/Perspective/world_object.gd" id="1_p1f1o"]
+[ext_resource type="PackedScene" uid="uid://k75hgw8owjyo" path="res://Scenes/2_5d_character.tscn" id="1_p8jf4"]
+[ext_resource type="Script" uid="uid://rg8bi64774bk" path="res://Scripts/Player/perspective_switcher.gd" id="2_p1f1o"]
+[ext_resource type="Script" uid="uid://bey2mymv72iof" path="res://Scripts/Player/interactor.gd" id="3_ys4pu"]
+[ext_resource type="PackedScene" uid="uid://hk02k3f4q5pk" path="res://Scenes/camera_controller_2_5d.tscn" id="4_h2ono"]
+[ext_resource type="Script" uid="uid://c0espd1navq62" path="res://Scripts/UI/hud.gd" id="5_on4kn"]
+[ext_resource type="Script" uid="uid://b7qdwlgjxtvee" path="res://Scripts/Interaction/locked_door.gd" id="7_h2ono"]
+[ext_resource type="Script" uid="uid://blkh6squha5pg" path="res://Scripts/Interaction/key_pickup.gd" id="8_on4kn"]
+[ext_resource type="PackedScene" uid="uid://tx8pnjntsspr" path="res://Scenes/goal.tscn" id="9_on4kn"]
+[ext_resource type="Script" uid="uid://csvfpifbnot6k" path="res://Scripts/Plank_Spwaner.gd" id="10_8va2t"]
+[ext_resource type="PackedScene" uid="uid://ivel3ia234p" path="res://Scenes/plank.tscn" id="10_70gml"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p8jf4"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_p1f1o"]
+sky_material = SubResource("ProceduralSkyMaterial_p8jf4")
+
+[sub_resource type="Environment" id="Environment_ys4pu"]
+background_mode = 2
+sky = SubResource("Sky_p1f1o")
+
+[node name="Tutorial" type="Node3D" unique_id=1647970730]
+
+[node name="BlueDoor" type="CSGBox3D" parent="." unique_id=620369295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.082325, 1.956677, -0.0030243397)
+use_collision = true
+size = Vector3(1, 4, 4)
+script = ExtResource("1_p1f1o")
+
+[node name="Lock" type="Node3D" parent="BlueDoor" unique_id=327321473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("7_h2ono")
+key_id = "blue"
+interact_range = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1819315090]
+environment = SubResource("Environment_ys4pu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2033661643]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=624318479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 0)
+use_collision = true
+size = Vector3(12, 1, 4)
+script = ExtResource("1_p1f1o")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=2067657690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.529335, -0.5, 0)
+use_collision = true
+size = Vector3(30.354004, 1, 4)
+script = ExtResource("1_p1f1o")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1477114502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.35439, -0.5, 0.3151908)
+use_collision = true
+size = Vector3(4.4387817, 1, 4)
+script = ExtResource("1_p1f1o")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1746015863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.612545, -0.5, -8.653973)
+use_collision = true
+size = Vector3(15.666992, 1, 4)
+script = ExtResource("1_p1f1o")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1150165333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.795275, 1.4116211, -8.653973)
+use_collision = true
+size = Vector3(0.92541504, 4.823242, 4)
+script = ExtResource("1_p1f1o")
+faction = 1
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=936193053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.800018, 1.4116211, -8.653973)
+use_collision = true
+size = Vector3(0.92541504, 4.823242, 4)
+script = ExtResource("1_p1f1o")
+faction = 2
+
+[node name="2_5DCharacter" parent="." unique_id=290764025 instance=ExtResource("1_p8jf4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5057335, 0.71277547, 0)
+
+[node name="PerspectiveSwitcher" type="Node" parent="2_5DCharacter" unique_id=780543323]
+script = ExtResource("2_p1f1o")
+
+[node name="Interactor" type="Node" parent="2_5DCharacter" unique_id=1260824728]
+script = ExtResource("3_ys4pu")
+
+[node name="CameraController2_5D" parent="." unique_id=1693983472 instance=ExtResource("4_h2ono")]
+transform = Transform3D(1, 0, 0, 0, 0.9063, 0.4226, 0, -0.4226, 0.9063, 6, 7, 10)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1121076354]
+script = ExtResource("5_on4kn")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1934534535]
+transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 3.7292285, 1.7576449, -1.0785451)
+text = "You Can Use WASD to Move and Q to Switch form 2D to 2.5D"
+font_size = 64
+autowrap_mode = 2
+
+[node name="Label3D2" type="Label3D" parent="." unique_id=389083528]
+transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 10.509662, 1.7576449, -1.0785451)
+text = "Try Using Q To Cross the Gap"
+font_size = 64
+autowrap_mode = 2
+
+[node name="Label3D4" type="Label3D" parent="." unique_id=103587887]
+transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 28.908306, 1.7576449, -0.7296419)
+text = "This Door is Locked But luckly the Key is on the Ground"
+font_size = 64
+autowrap_mode = 2
+
+[node name="Label3D5" type="Label3D" parent="." unique_id=1060845188]
+transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 36.266266, 1.7576449, -0.7296419)
+text = "This Door is Locked Too but The Key Is Hidden In Plane Sight"
+font_size = 64
+autowrap_mode = 2
+
+[node name="Label3D7" type="Label3D" parent="." unique_id=1774234083]
+transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 51.65285, 1.7576449, -0.7296419)
+text = "By Pressing G you Can Grab Planks"
+font_size = 64
+autowrap_mode = 2
+
+[node name="Label3D6" type="Label3D" parent="." unique_id=108229840]
+transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 66.17954, 1.2035038, -0.7296419)
+text = "This Is The End Of the Tutorial"
+font_size = 64
+autowrap_mode = 2
+
+[node name="Label3D3" type="Label3D" parent="." unique_id=520851062]
+transform = Transform3D(1, 0, 0, 0, 0.9858646, 0.16754499, 0, -0.16754499, 0.9858646, 16.067287, 1.5726526, -12.094963)
+text = "Some Objects Can Only Be Passed Through in 2D"
+font_size = 64
+autowrap_mode = 2
+
+[node name="RedDoor" type="CSGBox3D" parent="." unique_id=1781356104]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.406229, 1.9085383, 0.019061565)
+use_collision = true
+size = Vector3(1, 4, 4)
+script = ExtResource("1_p1f1o")
+
+[node name="Lock" type="Node3D" parent="RedDoor" unique_id=1455960526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("7_h2ono")
+interact_range = 2.0
+
+[node name="RedKey" type="Node3D" parent="." unique_id=1357944825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.30375, 0.4, 0.4785366)
+script = ExtResource("8_on4kn")
+interact_range = 2.0
+
+[node name="BlueKey" type="Node3D" parent="." unique_id=646671642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9767, 0.32533002, 0.84195065)
+script = ExtResource("8_on4kn")
+key_id = "blue"
+faction = 2
+
+[node name="Goal" parent="." unique_id=952319664 instance=ExtResource("9_on4kn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.951324, 1, 0.10454512)
+
+[node name="PlankSpwaner" type="Node" parent="." unique_id=427592681 node_paths=PackedStringArray("Marker3d")]
+script = ExtResource("10_8va2t")
+Marker3d = NodePath("Marker3D")
+Plank = ExtResource("10_70gml")
+metadata/_custom_type_script = "uid://csvfpifbnot6k"
+
+[node name="Marker3D" type="Marker3D" parent="PlankSpwaner" unique_id=632281523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.561172, 0.3627844, -0.92718077)

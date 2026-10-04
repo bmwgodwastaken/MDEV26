@@ -28,4 +28,4 @@ columns = 8
 
 [node name="BaseLevelButton" parent="GridContainer" unique_id=332489755 instance=ExtResource("1_22lal")]
 layout_mode = 2
-Button_path = "uid://c12tj01ujoyac"
+Button_path = "uid://b45qhtg330dtx"
