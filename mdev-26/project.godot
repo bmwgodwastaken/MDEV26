@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="MDEV26"
+config/version="1.00"
 run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.8", "GL Compatibility")
-config/icon="res://Assets/2D/icon.svg"
+config/icon="uid://myl641l7ujpk"
 
 [autoload]
 
