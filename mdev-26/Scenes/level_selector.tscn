@@ -61,7 +61,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_b8t80")
 text = "3"
 Button_path = "res://Scenes/Levels/level_03_plank_bridge.tscn"
 
-[node name="BaseLevelButton4" parent="GridContainer" instance=ExtResource("1_22lal")]
+[node name="GridContainer#BaseLevelButton4" parent="Panel/GridContainer" unique_id=578948078 instance=ExtResource("1_22lal")]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_b8t80")
 text = "4"
 Button_path = "res://Scenes/Levels/level_04_core.tscn"

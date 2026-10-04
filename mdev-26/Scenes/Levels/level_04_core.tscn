@@ -33,6 +33,10 @@ sky_material = SubResource("ProceduralSkyMaterial_1")
 background_mode = 2
 sky = SubResource("Sky_1")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nt537"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
 [node name="Level04Core" type="Node3D" unique_id=2005075746]
 script = ExtResource("8_level")
 
@@ -42,10 +46,6 @@ environment = SubResource("Environment_1")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=521378177]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
-
-[node name="Backdrop" parent="." unique_id=1094457012 instance=ExtResource("11_backdrop")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 0, -14.3)
-size = Vector2(150, 14)
 
 [node name="FloorNear" type="CSGBox3D" parent="." unique_id=1589394425]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.25, -0.5, 0)
@@ -158,13 +158,12 @@ reveal_range = 1.4
 faction = 2
 interact_range = 1.3
 
-[node name="GreenChest" parent="." instance=ExtResource("21_chest")]
+[node name="GreenChest" parent="." unique_id=2020739623 instance=ExtResource("21_chest")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.9, 0.5, -13.2)
 key_id = "green"
 
-[node name="OrangeKey" parent="." instance=ExtResource("15_key")]
+[node name="OrangeKey" parent="." unique_id=163300612 instance=ExtResource("15_key")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.9, 0.5, -13.2)
-faction = 0
 key_id = "orange"
 reveal_by_sight = true
 
@@ -220,3 +219,17 @@ transform = Transform3D(1, 0, 0, 0, 0.9063, 0.4226, 0, -0.4226, 0.9063, 6, 7, 10
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1686058503]
 script = ExtResource("7_hud")
+
+[node name="Backdrop" parent="." unique_id=1915313628 instance=ExtResource("11_backdrop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.705978, -10.822613, -14.394091)
+size = Vector2(250, 70)
+
+[node name="Backdrop2" parent="." unique_id=325150463 instance=ExtResource("11_backdrop")]
+transform = Transform3D(1, 0, 0, 0, 0.44299406, -0.89652455, 0, 0.89652455, 0.44299406, 24.705978, 29.52433, -3.7418823)
+size = Vector2(250, 25)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1928941419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.705978, -10.822613, -14.797644)
+use_collision = true
+size = Vector3(250, 70, 1)
+material = SubResource("StandardMaterial3D_nt537")
